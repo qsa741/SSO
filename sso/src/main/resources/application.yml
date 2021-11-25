@@ -1,0 +1,37 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    database: oracle
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  session:
+    timeout: 120
+  kafka:#    bootstrap-servers: 3.14.8.219:9092
+    bootstrap-servers: 10.47.39.102:9092
+  datasource:
+    url: jdbc:tibero:thin:@10.47.39.125:8629:DB_D_GMD
+    driver-class-name: com.tmax.tibero.jdbc.TbDriver
+    username: tester
+    password: tester
+#  datasource:#    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@localhost:1521:orcldb
+#    username: sso
+#    password: 1111
+server:
+  tomcat:
+    additional-tld-skip-patterns: "oraclepki.jar"
+dbms:
+  url: http://10.47.39.102:8080
+save:
+  agent:
+    - id: JY-SAVE
+    - network: OUT
+sso:
+  properties:
+    - network: IN
