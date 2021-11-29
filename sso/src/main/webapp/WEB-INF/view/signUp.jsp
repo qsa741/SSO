@@ -7,7 +7,7 @@
 	<title>회원가입</title>
 	<script src="/resources/easyui/jquery.min.js"></script>
 	<script src="/resources/easyui/jquery.easyui.min.js"></script>
-	<script src="/resources/js/signUp.js?ver=1"></script>
+	<script src="/resources/js/signUp.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/default/easyui.css">
@@ -36,7 +36,7 @@
 					<div class="row2">
 						<label>비밀번호&nbsp;<span class="essential">*</span></label>
 					</div>
-					<input class="easyui-passwordbox" iconWidth="28" id="pw" name="pw" prompt="8글자 이상" tabindex="2">
+					<input class="easyui-passwordbox" iconWidth="28" id="pw" name="pw" prompt="영문, 숫자, 특수문자로 8글자 이상" tabindex="2">
 				</div>
 				<div class="item">
 					<div class="row">

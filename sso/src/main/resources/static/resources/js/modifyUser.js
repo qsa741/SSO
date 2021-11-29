@@ -61,23 +61,27 @@ $(document).ready(function() {
 // Pw 유효성 검사
 function pwValidate(value) {
 	var pw = $('#pw').val();
-	
-	if($('#pw').textbox('textbox').val() == '8글자 이상' && value == '') {
+	var pwRegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+
+	if ($('#pw').textbox('textbox').val() == '영문, 숫자, 특수문자로 8글자 이상' && value == '') {
 		$('#pwCheckMsg').text('');
 		return 1;
-	} else if(pw.length < 8) {
+	} else if (pw.length < 8) {
 		$('#pwCheckMsg').text('8글자 이상 입력해주세요.');
 		return 1;
-	} else if(pw.length > 20) {
+	} else if (pw.length > 20) {
 		$('#pwCheckMsg').text('20글자 이하로 입력해주세요.');
 		return 1;
-	} else if(value == '') {
+	} else if (!pwRegExp.test(value)){
+		$('#pwCheckMsg').text('영문, 숫자, 특수문자가 필수입니다.');
+		return 1;
+	} else if (value == '') {
 		$('#pwCheckMsg').text('비밀번호 확인을 입력해주세요.');
 		return 1;
-	} else if(pw != value) {
+	} else if (pw != value) {
 		$('#pwCheckMsg').text('비밀번호가 틀립니다.');
 		return 1;
-	} else if(pw == value) {
+	} else if (pw == value) {
 		$('#pwCheckMsg').text('비밀번호 확인 성공')
 		return 0;
 	}
@@ -86,7 +90,7 @@ function pwValidate(value) {
 
 // Email 유효성 검사
 function emailValidate(value) {
-	var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1,2}[A-Za-z]{1,3}$/;
+	var emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 	
 	if(value == '' || value == 'example@example.com') {
 		$('#emailMsg').text('');
@@ -123,9 +127,6 @@ function phoneValidate(value) {
 		return 1;
 	} else if(!phoneRegExp.test(value)) {
 		$('#phoneMsg').text('번호에는 숫자만 입력해주세요.');
-		return 1;
-	} else if(value.length != 11) {
-		$('#phoneMsg').text('번호가 11글자가 아닙니다.');
 		return 1;
 	} else {
 		$.ajax({

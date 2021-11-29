@@ -30,7 +30,7 @@
 					<div class="row2">
 						<label>비밀번호&nbsp;<span class="essential">*</span></label>
 					</div>
-					<input class="easyui-passwordbox" iconWidth="28" id="pw" name="pw" prompt="영문 대소문자,숫자로 8글자 이상" value="${user.pw}">
+					<input class="easyui-passwordbox" iconWidth="28" id="pw" name="pw" prompt="영문, 숫자, 특수문자로 8글자 이상" value="${user.pw}">
 				</div>
 				<div class="item">
 					<div class="row">
