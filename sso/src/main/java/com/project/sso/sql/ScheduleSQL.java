@@ -11,19 +11,24 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ScheduleSQL {
 	
 	// Tibero driver
-	private String driver = "com.tmax.tibero.jdbc.TbDriver";
+	@Value("${spring.datasource.driver-class-name}")
+	private String driver;
 	// 125 Tibero 서버
-	private String url = "jdbc:tibero:thin:@10.47.39.125:8629:DB_D_GMD";
+	@Value("${spring.datasource.url}")
+	private String url;
 	
-	private final String DBID = "tester";
+	@Value("${spring.datasource.username}")
+	private String username;
 	
-	private final String DBPW = "tester"; 
+	@Value("${spring.datasource.password}")
+	private String password;
 	
 	// 가입/수정이 요청된 레코드 저장
 	public List<Map<String, Object>> userScheduler() throws Exception {
@@ -38,7 +43,7 @@ public class ScheduleSQL {
 		ResultSet result = null;
 		try {
 			Class.forName(driver);
-			conn = DriverManager.getConnection(url, DBID, DBPW);
+			conn = DriverManager.getConnection(url, username, password);
 			pre = conn.prepareStatement(sql);
 			result = pre.executeQuery();
 		
@@ -60,8 +65,8 @@ public class ScheduleSQL {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(result != null) try {conn.close();} catch(SQLException se) {}
-			if(pre != null) try {conn.close();} catch(SQLException se) {}
+			if(result != null) try {result.close();} catch(SQLException se) {}
+			if(pre != null) try {pre.close();} catch(SQLException se) {}
 			if(conn != null) try {conn.close();} catch(SQLException se) {}
 		}
 		
@@ -78,14 +83,14 @@ public class ScheduleSQL {
 		ResultSet result = null;
 		try {
 			Class.forName(driver);
-			conn = DriverManager.getConnection(url, DBID, DBPW);
+			conn = DriverManager.getConnection(url, username, password);
 			pre = conn.prepareStatement(sql);
 			result = pre.executeQuery();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(result != null) try {conn.close();} catch(SQLException se) {}
-			if(pre != null) try {conn.close();} catch(SQLException se) {}
+			if(result != null) try {result.close();} catch(SQLException se) {}
+			if(pre != null) try {pre.close();} catch(SQLException se) {}
 			if(conn != null) try {conn.close();} catch(SQLException se) {}
 		}
 	}

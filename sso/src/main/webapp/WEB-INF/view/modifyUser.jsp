@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,12 @@
 					<div class="row">
 						<label>DB 유저이름&nbsp;</label>
 					</div>
-					<input class="easyui-textbox" id="dbUser" name="dbUser" prompt=" - " value="${user.dbId}">
+					<c:if test="${user.dbId != null || user.dbId == 'null'}">
+						<input class="easyui-textbox" id="dbUser" name="dbUser" prompt=" - " value="${user.dbId}">
+					</c:if>
+					<c:if test="${user.dbId == null }">
+						<input class="easyui-textbox" id="dbUser" name="dbUser" prompt=" - ">
+					</c:if>
 				</div>
 				<div class="item">
 					<div class="row">

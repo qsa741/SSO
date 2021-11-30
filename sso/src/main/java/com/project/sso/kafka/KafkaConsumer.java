@@ -18,16 +18,24 @@ public class KafkaConsumer {
 	@Autowired
 	private KafkaServiceImpl kafkaService;
 	
-	@KafkaListener(topics = "saveUser", groupId = "sso")
-	public void consume(String data) throws Exception {
-		System.out.println(String.format("Consumed message : %s", data));
+	@KafkaListener(topics = "userTopic", groupId = "sso")
+	public void saveUser(String data) throws Exception {
 		JSONObject json = new JSONObject(data);
+		
 		String id = (String)json.get("id");
-		if(id.equals("JY-SCRIPT")) {
-			networkService.sendScript(json);
-		} else if(id.equals("JY-SAVE-02")) {
+		if(id.equals("JY-SAVE-02")) {
 			kafkaService.saveUser(json);
 		}
 	}
 	
+	@KafkaListener(topics = "actionTopic", groupId = "sso") 
+	public void settingUserAction(String data) throws Exception {
+		JSONObject json = new JSONObject(data);
+		
+		String id = json.getString("id");
+		if(id.equals("JY-ACTION")) {
+			networkService.settingUserAction(json); 
+		}
+		
+	}
 }

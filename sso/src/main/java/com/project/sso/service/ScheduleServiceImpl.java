@@ -23,15 +23,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	private UsersRepository userRepository;
 	
-	// 30초 간격으로 유저 가입/수정 메서드 실행
-	@Scheduled(cron = "0/30 * * * * *")
+	// 10초 간격으로 유저 가입/수정 메서드 실행
+	@Scheduled(cron = "0/10 * * * * *")
 	@Override
 	public void userScheduler() throws Exception {
 		List<Map<String, Object>> list = scheduleSQL.userScheduler();
 		Map<String, Object> map;
 		Users user;
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String time = null;
+		String time = fmt.format(new Date());
 		for(int i = 0; i < list.size(); i++) {
 			
 			map = list.get(i);
@@ -52,10 +52,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 				user.setReg((Date)json.get("reg"));
 			}
 			user.setState((String)json.get("state"));
+			
 			userRepository.save(user);
 		}
 		
-		//System.out.println(new Date().toString() + " -- User Scheduler " + list.size() + " rows execute");
+		// System.out.println(new Date().toString() + " -- User Scheduler " + list.size() + " rows execute");
 	}
 	
 	// 하루 간격으로 탈퇴한지 24개월 지난 계정 삭제

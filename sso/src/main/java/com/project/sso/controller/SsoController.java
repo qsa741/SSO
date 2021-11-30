@@ -39,7 +39,7 @@ public class SsoController {
 		return view;
 	}
 
-	// 로그인 성공시 페이지 연결
+	// 로그인 확인 페이지 연결
 	@PostMapping("/signInCheck")
 	public String signInCheck(HttpServletResponse response, Users user, String auto, Model model) throws Exception {
 		int res = ssoService.signIn(user, auto, response);

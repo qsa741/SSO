@@ -31,7 +31,10 @@ dbms:
 save:
   agent:
     - id: JY-SAVE
-    - network: OUT
+    - network: IN
+action:
+  agent:
+    - id: JY-ACTION-02
 sso:
   properties:
     - network: IN

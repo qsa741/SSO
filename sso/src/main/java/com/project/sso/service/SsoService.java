@@ -33,6 +33,6 @@ public interface SsoService {
 	public void signOut(HttpServletRequest request, HttpServletResponse response);
 	
 	// 자동 로그인 확인
-	public boolean autoSignInCheck(HttpServletRequest request);
+	public boolean autoSignInCheck(HttpServletRequest request) throws Exception ;
 	
 }

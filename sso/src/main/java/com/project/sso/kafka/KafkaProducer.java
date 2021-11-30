@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaProducer {
 	
+	private static final String TOPIC = "userTopic";
 	
-	private static final String TOPIC = "dbmsTopic";
 	private final KafkaTemplate<String, String> kafkaTemplate;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -21,5 +21,9 @@ public class KafkaProducer {
 	
 	public void sendDBMS(JSONObject json) {
 		this.kafkaTemplate.send(TOPIC, json.toString());
+	}
+	
+	public void sendUserAction(JSONObject json) {
+		this.kafkaTemplate.send("actionTopic", json.toString());
 	}
 }

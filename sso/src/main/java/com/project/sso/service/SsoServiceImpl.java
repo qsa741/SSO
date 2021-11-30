@@ -17,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.project.sso.config.SessionConfig;
 import com.project.sso.entity.Users;
 import com.project.sso.repository.UsersRepository;
+import com.project.sso.sql.SsoSQL;
 import com.project.sso.util.key.AES256;
 import com.project.sso.util.mail.SendMail;
 
@@ -26,6 +27,9 @@ public class SsoServiceImpl implements SsoService {
 	@Autowired
 	private UsersRepository userRepository;
 
+	@Autowired
+	private SsoSQL ssoSQL;
+	
 	@Autowired
 	private NetworkServiceImpl networkService;
 
@@ -71,22 +75,24 @@ public class SsoServiceImpl implements SsoService {
 	@Override
 	public void saveUser(Users user) throws Exception {
 		AES256 aes = new AES256();
-
+		String action = "C";
 		if (user.getId() == null) {
 			String id = sessionID();
 			user.setId(id);
+			action = "U";
 		}
 		user.setState("Y");
 		user.setPw(aes.encrypt(user.getPw()));
 		if (user.getDbPw() != null) {
 			user.setDbPw(aes.encrypt(user.getDbPw()));
 		}
-		networkService.saveUser(user);
+		
+		networkService.saveUser(user, action);
 	}
 
 	// 자동 로그인 확인
 	@Override
-	public boolean autoSignInCheck(HttpServletRequest request) {
+	public boolean autoSignInCheck(HttpServletRequest request) throws Exception {
 		String sid = sessionID();
 		AES256 aes = new AES256();
 
@@ -103,6 +109,7 @@ public class SsoServiceImpl implements SsoService {
 								RequestAttributes.SCOPE_SESSION);
 						RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW",
 								aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
+						ssoSQL.saveUserAction("R", sid);
 						return true;
 					}
 				}
@@ -113,6 +120,7 @@ public class SsoServiceImpl implements SsoService {
 					RequestAttributes.SCOPE_SESSION);
 			RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW", aes.decrypt(newUser.getDbPw()),
 					RequestAttributes.SCOPE_SESSION);
+			ssoSQL.saveUserAction("R", sid);
 			return true;
 		}
 		return false;
@@ -141,7 +149,7 @@ public class SsoServiceImpl implements SsoService {
 							RequestAttributes.SCOPE_SESSION);
 					RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW", aes.decrypt(newUser.getDbPw()),
 							RequestAttributes.SCOPE_SESSION);
-
+					ssoSQL.saveUserAction("R", user.getId());
 					if (auto != null) {
 						Cookie cookie = new Cookie("auto", user.getId());
 						cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -180,6 +188,7 @@ public class SsoServiceImpl implements SsoService {
 		user.setState("N");
 		user.setDeleteReg(fmt.parse(time));
 		userRepository.save(user);
+		ssoSQL.saveUserAction("D", id);
 		signOut(request, response);
 	}
 

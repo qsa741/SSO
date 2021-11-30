@@ -42,5 +42,5 @@ public class KafkaServiceImpl implements KafkaService{
 		
 		userRepository.save(user);
 	}
-	
+
 }
