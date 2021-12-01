@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScheduleSQL {
 	
-	// Tibero driver
+	// Tibero driver, url, username, password
 	@Value("${spring.datasource.driver-class-name}")
 	private String driver;
-	// 125 Tibero 서버
+
 	@Value("${spring.datasource.url}")
 	private String url;
 	
