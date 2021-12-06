@@ -1,0 +1,86 @@
+.container {
+	width:400px;
+	height:auto;
+	margin:auto;
+	background-color:#fff;
+	padding-top:50px;
+	padding-bottom:50px;
+}
+
+.header {
+	margin:auto;
+	text-align:center;
+	font-size:30px;
+}
+
+.border {
+	width:350px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+	border:1px solid #aaa;
+	border-radius:10px;
+	padding:20px 20px 10px;
+}
+
+.border input {
+	width:310px;
+}
+
+.border label {
+	font-size:16px;
+}
+
+.item {
+	margin-bottom:10px;
+}
+
+.item .essential{
+	color:red;
+}
+
+.item .row {
+    justify-content: space-between;
+}
+
+.row .msg {
+	color:red;
+	text-align:right;
+	font-size:8px;
+    align-self: flex-end;
+}
+
+.row2{
+	width:100%;
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.row2 a {
+	font-size:12px;
+	text-decoration:none;
+	color:#0969da;
+}
+
+
+.signUp-btns {
+	width:350px;
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+
+.signUp-btns input {
+	width:150px;
+	height:30px;
+}
+
+#dbTest {
+	width:auto;
+	border: none;
+	background-color:#fff;
+	color:#0969da;
+	font-size:12px;
+	cursor: pointer;
+}
