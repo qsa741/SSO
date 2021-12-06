@@ -68,12 +68,11 @@ $(document).ready(function() {
 			if (node.id == 'SCHEMA' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load("/dbms/schemaDetails");
-				saveClick = node.text;
 			} else if (node.id == 'TABLE' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load('/dbms/tableDetails');
-				saveClick = node.text;
 			}
+			saveClick = node.text;
 		},
 		// 더블클릭시 ID에 맞는 하위 목록 불러오기
 		onDblClick: function(node) {

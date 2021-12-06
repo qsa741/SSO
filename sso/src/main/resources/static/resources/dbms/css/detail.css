@@ -1,6 +1,7 @@
 #schemaDetails {
 	height: 100%;
 }
+
 /*
 #schemaDetails .datagrid-cell {
 	font-size:12px;
@@ -10,3 +11,7 @@
 	height:25px;
 }
 */
+
+#tableDetails {
+	height: 100%;
+}

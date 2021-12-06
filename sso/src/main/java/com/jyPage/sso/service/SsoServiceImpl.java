@@ -34,19 +34,9 @@ public class SsoServiceImpl implements SsoService {
 	@Autowired
 	private NetworkServiceImpl networkService;
 
-	// 세션아이디 SSOID 가져오기
+	// 세션 ID 가져오기
 	public String sessionID() {
 		return (String) RequestContextHolder.getRequestAttributes().getAttribute("JYSESSION",
-				RequestAttributes.SCOPE_SESSION);
-	}
-
-	public String sessionDBID() {
-		return (String) RequestContextHolder.getRequestAttributes().getAttribute("JYDBID",
-				RequestAttributes.SCOPE_SESSION);
-	}
-
-	public String sessionDBPW() {
-		return (String) RequestContextHolder.getRequestAttributes().getAttribute("JYDBPW",
 				RequestAttributes.SCOPE_SESSION);
 	}
 

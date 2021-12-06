@@ -151,7 +151,6 @@
 			},
 			dataType: 'json',
 			success: function(data) {
-				console.log(data);
 				scriptResult(data);
 			},
 			error: function(e) {
