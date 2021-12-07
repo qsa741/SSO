@@ -40,4 +40,4 @@ action:
   
 sso:
   properties:
-    network: IN
+    network: OUT

@@ -199,14 +199,14 @@ EasyUI
 
 .top {
 	width: 100% !important;
-	height: 65%;
+	height: 60%;
 	overflow-y:auto;
 }
 
 
 .bottom {
 	width: 100% !important;
-	height: 35%;
+	height: 40%;
 	overflow-y:hidden;
 }
 .bottom #include {

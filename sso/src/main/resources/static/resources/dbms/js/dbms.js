@@ -71,6 +71,9 @@ $(document).ready(function() {
 			} else if (node.id == 'TABLE' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load('/dbms/tableDetails');
+			} else if (node.id == 'INDEX' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/indexDetails');
 			}
 			saveClick = node.text;
 		},
@@ -135,7 +138,7 @@ function folderToggle(node) {
 // Script 결과 출력
 function scriptResult(data) {
 	// SQL문이 SELECT일때
-	if (data.type == 'SELECT') {
+	if (data.size != 0) {
 		consoleAddTab(data);
 		// SELECT 외 다른 명령어 처리
 	} else {

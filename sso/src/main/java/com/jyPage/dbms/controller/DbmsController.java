@@ -29,6 +29,12 @@ public class DbmsController {
 		return "/dbms/tableDetails";
 	}
 	
+	// jsp include용 페이지 - index
+	@RequestMapping("/indexDetails")
+	public String indexDetails() {
+		return "/dbms/indexDetails";
+	}
+	
 	// 추가 table tab 페이지 
 	@RequestMapping("/loadTable")
 	public String loadTable(LoadObjectDTO dto, DbDTO dbDto, Model model) {

@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/resources/easyui/plugins/jquery.resizable.js"></script>
 <script type="text/javascript" src="/resources/easyui/plugins/jquery.linkbutton.js"></script>
 <script type="text/javascript" src="/resources/dbms/js/chart.js"></script>
-<script type="text/javascript" src="/resources/dbms/js/dbms.js?ver=2"></script>
+<script type="text/javascript" src="/resources/dbms/js/dbms.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/dbms/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/resources/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="/resources/easyui/themes/default/easyui.css">
