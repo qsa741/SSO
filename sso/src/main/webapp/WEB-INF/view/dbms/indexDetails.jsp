@@ -23,6 +23,18 @@
 					$('#indexDetailsIndex').datagrid({data});
 				}
 			});
+			$.ajax({
+				url : 'http://10.47.39.102:8080/dbmsTool/indexDetailsColumns',
+				data : {
+					indexName : node.text,
+					dbId : dbId,
+					dbPw : dbPw
+				},
+				dataType: 'json',
+				success : function(data) {
+					$('#indexDetailsColumns').datagrid({data});
+				}
+			});
 		}
 	});
 </script>
@@ -38,11 +50,14 @@
     	</table>
     </div>
 	<div class="tab" title="Columns" style="display:none;">
-    	<table id="indexDetailsIndex" class="easyui-datagrid" data-options="singleSelect:'true'">
+    	<table id="indexDetailsColumns" class="easyui-datagrid" data-options="singleSelect:'true'">
     		<thead>
     			<tr>
-    				<th data-options="field:'PARAMETER'">Parameter</th>
-    				<th data-options="field:'VALUE'">Value</th>
+    				<th data-options="field:'COLUMN_NAME'">Column</th>
+    				<th data-options="field:'COLUMN_POSITION'">Position</th>
+    				<th data-options="field:'COLUMN_LENGTH'">Length</th>
+    				<th data-options="field:'TABLE_OWNER'">Table Owner</th>
+    				<th data-options="field:'TABLE_NAME'">Table Name</th>
     			</tr>
     		</thead>
     	</table>
