@@ -35,6 +35,12 @@ public class DbmsController {
 		return "/dbms/indexDetails";
 	}
 	
+	// jsp include용 페이지 - sequence
+	@RequestMapping("/sequenceDetails")
+	public String sequenceDetails() {
+		return "/dbms/sequenceDetails";
+	}
+	
 	// 추가 table tab 페이지 
 	@RequestMapping("/loadTable")
 	public String loadTable(LoadObjectDTO dto, DbDTO dbDto, Model model) {

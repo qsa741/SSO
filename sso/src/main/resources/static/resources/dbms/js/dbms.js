@@ -74,6 +74,9 @@ $(document).ready(function() {
 			} else if (node.id == 'INDEX' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load('/dbms/indexDetails');
+			} else if (node.id == 'SEQUENCE' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/sequenceDetails');
 			}
 			saveClick = node.text;
 		},
