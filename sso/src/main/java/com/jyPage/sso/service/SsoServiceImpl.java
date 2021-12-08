@@ -110,7 +110,7 @@ public class SsoServiceImpl implements SsoService {
 								RequestAttributes.SCOPE_SESSION);
 						RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW",
 								aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
-						ssoSQL.saveUserAction("R", sid);
+						ssoSQL.saveUserAction("R", c.getValue());
 						return true;
 					}
 				}

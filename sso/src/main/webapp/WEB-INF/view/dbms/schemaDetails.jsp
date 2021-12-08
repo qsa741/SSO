@@ -95,36 +95,6 @@
     		</thead>
     	</table>
     </div>
-    <div class="tab" title="Object Grants" style="display:none;">
-         <table id="schemaDetailsObjectGrants" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'privileage'">Privileage</th>
-    				<th data-options="field:'admin'">Admin</th>
-    				<th data-options="field:'grantee'">Grantee</th>
-    				<th data-options="field:'grantor'">Grantor</th>
-    				<th data-options="field:'owner'">Owner</th>
-    				<th data-options="field:'objectType'">Object Type</th>
-    				<th data-options="field:'objectName'">Object Name</th>
-    				<th data-options="field:'columnName'">Column Name</th>
-    				<th data-options="field:'type'">Type</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
-    <div class="tab" title="Objects" style="display:none;">
-         <table id="schemaDetailsObjects" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'tablespace'">Tablespace</th>
-    				<th data-options="field:'objectName'">Object Name</th>
-    				<th data-options="field:'objectType'">Object Type</th>
-    				<th data-options="field:'headerFile'">Header File</th>
-    				<th data-options="field:'headerBlock'">Header Block</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
     <div class="tab" title="Extents" style="display:none;">
          <table id="schemaDetailsExtents" class="easyui-datagrid" data-options="singleSelect:'true'">
     		<thead>

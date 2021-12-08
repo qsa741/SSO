@@ -11,6 +11,10 @@
 			window.location='/users/signOut';
 		} else {
 			var node = $('#dbmsTree').tree('getSelected');
+			if(node.id == 'COLUMN') {
+				node = $('#dbmsTree').tree('getParent', node.target);
+				node = $('#dbmsTree').tree('getParent', node.target);
+			}
 			var parent = $('#dbmsTree').tree('getParent', node.target);
 			var schema = $('#dbmsTree').tree('getParent', parent.target);
 			$.ajax({
@@ -68,6 +72,7 @@
 					});
 				}
 			});
+			$('#tableDetailsIndexesBottom').datagrid(null);
 			$.ajax({
 				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsConstraints',
 				data : {

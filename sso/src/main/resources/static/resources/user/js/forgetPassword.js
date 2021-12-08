@@ -44,7 +44,7 @@ $(document).ready(function() {
 					email : value
 				},
 				success: function(data) {
-					if(data.result != 1) {
+					if(data != 1) {
 						$('#emailMsg').text('등록된 이메일이 아닙니다.')
 					} else {
 						$('#emailMsg').text('');

@@ -1,16 +1,29 @@
+body {
+	background-color: gainsboro;
+}
+
 .container {
 	width:400px;
 	height:auto;
 	margin:auto;
+	margin-top: 100px;
 	background-color:#fff;
-	padding-top:50px;
-	padding-bottom:50px;
+    border-radius:10px;
+    padding-bottom: 20px;
 }
 
 .header {
 	margin:auto;
-	text-align:center;
+	height:60px;
+	/* text-align:center; */
+	display: flex;
 	font-size:30px;
+	font-weight: 600;
+	color: #fff;
+	background-color:#709078;
+	border-radius:10px 10px 0 0;
+	justify-content: center;
+	align-items: center;
 }
 
 .border {
@@ -18,7 +31,6 @@
 	height:auto;
 	margin:auto;
 	margin-top:20px;
-	border:1px solid #aaa;
 	border-radius:10px;
 	padding:20px 20px 10px;
 }

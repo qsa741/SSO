@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/resources/easyui/plugins/jquery.resizable.js"></script>
 <script type="text/javascript" src="/resources/easyui/plugins/jquery.linkbutton.js"></script>
 <script type="text/javascript" src="/resources/dbms/js/chart.js"></script>
-<script type="text/javascript" src="/resources/dbms/js/dbms.js?ver=2"></script>
+<script type="text/javascript" src="/resources/dbms/js/dbms.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/dbms/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/resources/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="/resources/easyui/themes/default/easyui.css">
@@ -49,7 +49,7 @@
 	})
 	
 	// 스키마 하위 목록 불러오기
-	function getSchemaInfo(node) {
+	function getSchemaInfo(node, type) {
 		if (node.children == null) {
 			$.ajax({
 				url: 'http://10.47.39.102:8080/dbmsTool/schemaInfo',
@@ -63,18 +63,32 @@
 					if (data == null) {
 						sessionOut();
 					} else {
+						if(type == 'ex'){
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 						$('#dbmsTree').tree('append', {
 							parent: node.target,
-							data: data
+							data: data,
 						});
+						if(type == 'ex') {
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 					}
 				}
+			}).done(function() {
+				if(type == 'db') {
+					folderToggle(node);
+				}
 			});
+		} else {
+			if(type == 'db') {
+				folderToggle(node);
+			}
 		}
 	}
 	
 	// 오브젝트 하위 목록 불러오기
-	function getObjectInfo(node) {
+	function getObjectInfo(node, type) {
 		var root = $('#dbmsTree').tree('getRoot', node.target);
 		if (node.children == null) {
 			$.ajax({
@@ -90,26 +104,42 @@
 					if (data == null) {
 						sessionOut();
 					} else {
+						if(type == 'ex'){
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 						$('#dbmsTree').tree('append', {
 							parent: node.target,
 							data: data
 						});
+						if(type == 'ex'){
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 					}
 				}
+			}).done(function() {
+				if(type == 'db') {
+					folderToggle(node);
+				}
 			});
+		} else {
+			if(type == 'db') {
+				folderToggle(node);
+			}
 		}
 	}
 	
 	// 테이블 정보 불러오기
-	function loadObjectTable(node) {
-		var root = $('#dbmsTree').tree('getRoot', node.target);
-		addTab(node.text, '/dbms/loadTable?schema=' + root.text + '&objectType=' + node.id + '&objectName=' + node.text
-				 + '&dbId=' + dbId + '&dbPw=' + dbPw);
-		getTableChildren(node);
+	function loadObjectTable(node, type) {
+		if(type == 'db') {
+			var root = $('#dbmsTree').tree('getRoot', node.target);
+			addTab(node.text, '/dbms/loadTable?schema=' + root.text + '&objectType=' + node.id + '&objectName=' + node.text
+					 + '&dbId=' + dbId + '&dbPw=' + dbPw);
+		}
+		getTableChildren(node, type);
 	}
 	
 	// 테이블 자식 정보 불러오기 (Column, Constraint, Index)
-	function getTableChildren(node) {
+	function getTableChildren(node, type) {
 		// 선택 노드가 Table이고 하위 항목이 없을시 실행
 		if (node.id == 'TABLE' && node.children == null) {
 			var root = $('#dbmsTree').tree('getRoot', node.target);
@@ -127,13 +157,27 @@
 					if (data == null) {
 						sessionOut();
 					} else {
+						if(type == 'ex'){
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 						$('#dbmsTree').tree('append', {
 							parent: node.target,
 							data: data.children
 						});
+						if(type == 'ex'){
+							$('#dbmsTree').tree('toggle', node.target);
+						}
 					}
 				}
+			}).done(function() {
+				if(type == 'db') {
+					folderToggle(node);
+				}
 			});
+		} else {
+			if(type == 'db') {
+				folderToggle(node);
+			}
 		}
 	}
 
@@ -222,12 +266,16 @@
 					<ul id="dbmsTree" class="easyui-tree">
 					</ul>
 				</div>
-				<div class="bottom" data-options="region:'south',split:true">
+				<div class="bottom" data-options="region:'south',title:'Details',split:true">
 					<div id="include"></div>
 				</div>
 			</div>
-			<div class="content easyui-layout"
-				data-options="region:'center',split:true">
+			<c:if test="${sessionScope.JYDBID == null}">
+				<div class="content easyui-layout" data-options="region:'center',title:'DB ID',split:true">
+			</c:if>
+			<c:if test="${sessionScope.JYDBID != null}">
+				<div class="content easyui-layout" data-options="region:'center',title:'${sessionScope.JYDBID.toUpperCase()}',split:true">
+			</c:if>
 				<div class="top" data-options="region:'center',split:true">
 					<div id="centerTabs" class="easyui-tabs">
 						<div class="tab" title="Script" style="display: none;">
@@ -267,9 +315,9 @@
 		</div>
 		<div id="drawer" class="easyui-drawer">
 			<div>
-				<input id="mChartCombobox" class="easyui-combobox"
+				<select id="mChartCombobox" class="easyui-combobox"
 					data-options="editable:false,height:'20px',width:'80px'"
-					name="mChart">
+					name="mChart"></select>
 			</div>
 			<div id="mChart">
 				<canvas></canvas>
@@ -277,7 +325,8 @@
 			<div style="display: flex;">
 				<select id="dChartYearCombobox" class="easyui-combobox"
 					data-options="editable:false,height:'20px',width:'80px'"
-					name="dChartYear"></select> &nbsp;&nbsp;&nbsp; <select
+					name="dChartYear"></select> &nbsp;&nbsp;&nbsp; 
+				<select
 					id="dChartMonthCombobox" class="easyui-combobox"
 					data-options="editable:false,height:'20px',width:'80px'"
 					name="dChartMonth"></select>

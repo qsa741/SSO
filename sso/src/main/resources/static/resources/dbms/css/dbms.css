@@ -33,6 +33,7 @@ EasyUI
 #mainBody {
 	display: flex;
 	justify-content: center;
+	background-color: gainsboro;
 }
 
 
@@ -55,8 +56,9 @@ EasyUI
 	min-width:200px;
 	width:auto;
 	height:90%;
-    border: 0.2px solid #95B8E7;
-    border-radius: 15px;
+	/* border: 0.2px solid #95B8E7; */
+	border-radius: 15px;
+	background-color: #fff;
 }
 #user:hover {
 	background-color:#f9f9f9;
@@ -95,14 +97,14 @@ EasyUI
 #userBtn span {
 	width:30px;
 	height: 2px;
-	border:1px solid #95B8E7;
+	border: 2px solid #555;
 	border-radius: 1px;
-	background-color: #95B8E7;
+	background-color: #555;
 }
 #userMenu {
 	width:300px;
 	height: auto !important;
-	border:1px solid #95B8E7;
+	border:1px solid #bbb;
 	background-color: #fff;
 }
 #userMenu .menu-line {
@@ -113,6 +115,7 @@ EasyUI
 .side {
 	width: 30%;
 	overflow-y: hidden;
+	border-radius: 0 0 0 6px;
 }
 
 #dbmsTree {
@@ -170,11 +173,12 @@ EasyUI
 }
 
 #include {
-	border-top: 1px solid #95B8E7;
+	border-top: 1px solid #bbb;
 }
 
 .content {
 	width: 70%;
+    border-radius: 0 0 6px 0;
 }
 .content .tabs-header {
 	border: none;
@@ -183,17 +187,26 @@ EasyUI
 	padding:3px;
     background-color: #fff8e063
 }
+
+#scriptToolbar button {
+	background: #fdfdfd;
+}
+#scriptToolbar button:hover {
+	background: #f1f1f1;
+}
+
+
 #scriptBody {
 	overflow:hidden;
-	height: 94%;
+	height: calc(100% - 36px);
 }
 #script {
 	width:100%;
-	height:97%;
+	height: 100%;
 	resize:none;
 	font-size:20px;
-	border:1px solid #95B8E7;
-	outline-color: #95B8E7;
+	border:1px solid #bbb;
+	outline-color: #bbb;
 }
 
 
@@ -270,19 +283,24 @@ table * {
 /* EasyUI */
 /* panel */
 .panel {
-	background-color: #fff;
+	background-color: gainsboro;
+	border-top: 0.1px solid #ddd;
 }
 .panel-header {
-	background: linear-gradient(to bottom,#fff 0,#fff 100%);
+	background: linear-gradient(to bottom,#709078 0,#709078 100%);
+	border-radius: 6px 6px 0 0;
+	border: none;
+	width: 100% !important;
 }
 
 .panel-title {
-	color: #000;
+	color: #fafafa;
 }
 
 .panel-body {
 	width: 100% !important;
 	height: 100%;
+	border: none;
 } 
 
 .panel .layout-panel {
@@ -291,18 +309,40 @@ table * {
 
 /* layout */
 .layout-split-west {
-	border-right: 5px solid #fff;
+	border-right: 5px solid gainsboro;
 }
 .layout-split-south {
-	border-top: 5px solid #fff;
+	border-top: 5px solid gainsboro;
 }
+.layout-button-left {
+    background: url('/resources/dbms/img/layout_arrows.png') no-repeat 0 0;
+}
+.layout-button-right {
+    background: url('/resources/dbms/img/layout_arrows.png') no-repeat 0 -16px;
+}
+.layout-button-down {
+    background: url('/resources/dbms/img/layout_arrows.png') no-repeat -16px 0;
+}
+.layout-button-up {
+    background: url('/resources/dbms/img/layout_arrows.png') no-repeat -16px -16px;
+}
+.layout-expand {
+	background-color: #709078;
+	border-radius: 6px;
+}
+
 
 /* combobox */
 .combo-p .panel-body{
 	height: 100% !important;
+	border: 0.1px solid #ddd;
 }
 
+
 /* tab */
+.tabs {
+	border-color: #ddd;
+}
 .tabs-header {
 	width: 100% !important;
 	background-color: #fff;
@@ -313,9 +353,11 @@ table * {
 .tabs-inner {
 	background-color: #fff !important;
 	background: linear-gradient(to bottom,#fff 0,#fff 100%) !important;
+	border: none;
 }
 .tabs-panels {
 	width: 100% !important;
+	border: none;
 }
 .tabs-panels .panel {
 	width: 100% !important;
@@ -328,18 +370,32 @@ table * {
 .tabs-panels .panel-body {
 	overflow: hidden;
 }
+.tabs li.tabs-selected .tabs-inner {
+    border: 1.5px solid #aaa;
+    border-bottom: none;
+}
+.tabs li .tabs-inner {
+    border: 1px solid #aaa;
+}
 .tabs-scroller-left{
 	background: #fff url('/resources/dbms/img/tabs_icons.png') no-repeat 1px center;
 	height:32px !important;
+	border:1px solid #ddd;
+	border-bottom:none;
 }
 .tabs-scroller-right {
 	background: #fff url('/resources/dbms/img/tabs_icons.png') no-repeat -15px center;
 	height:32px !important;
+	border:1px solid #ddd;
+	border-bottom:none;
 }
-.tabs-wrap {
-	width: calc(100% - 36px) !important;
-}
+
+
 /* datagrid */
+.datagrid {
+    border: none;
+    border-top: 0.1px solid #ddd;
+}
 .datagrid-wrap {
 	width: 100% !important;
 	height: 100% !important;
@@ -374,3 +430,4 @@ table * {
 .datagrid-wrap .datagrid-view .datagrid-body .datagrid-cell {
 	font-size: 12px;
 }
+

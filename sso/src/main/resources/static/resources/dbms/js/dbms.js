@@ -45,7 +45,7 @@ $(document).ready(function() {
 	});
 	// 마우스 클릭시 커서 위치 저장
 	var cursor = 0;
-	$('#script').click(function(e) {
+	$('#script').click(function() {
 		cursor = this.selectionEnd;
 	});
 
@@ -68,7 +68,7 @@ $(document).ready(function() {
 			if (node.id == 'SCHEMA' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load("/dbms/schemaDetails");
-			} else if (node.id == 'TABLE' && node.text != saveClick) {
+			} else if ((node.id == 'TABLE' || node.id == 'COLUMN') && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load('/dbms/tableDetails');
 			} else if (node.id == 'INDEX' && node.text != saveClick) {
@@ -79,18 +79,29 @@ $(document).ready(function() {
 				$('#include').load('/dbms/sequenceDetails');
 			}
 			saveClick = node.text;
+			
 		},
 		// 더블클릭시 ID에 맞는 하위 목록 불러오기
 		onDblClick: function(node) {
 			if (node.id == 'SCHEMA') {
-				getSchemaInfo(node);
+				getSchemaInfo(node,'db');
 			} else if (node.id == 'TABLE') {
-				loadObjectTable(node);
+				loadObjectTable(node, 'db');
 			} else {
-				getObjectInfo(node);
+				getObjectInfo(node, 'db');
 			}
-			folderToggle(node);
+		},
+		onBeforeExpand: function(node) {
+			if (node.id == 'SCHEMA') {
+				getSchemaInfo(node, 'ex');
+			} else if (node.id == 'TABLE') {
+				loadObjectTable(node, 'ex');
+			} else {
+				getObjectInfo(node, 'ex');
+			}
 		}
+		
+		
 	});
 
 	// 차트 초기값 세팅
@@ -205,7 +216,6 @@ function setChartYears() {
 				if (i == 0) {
 					selectMChartYear(data[i]);
 					selectDChartYear(data[i]);
-					setChartMonth(data[i]);
 				}
 			}
 			$('#mChartCombobox').combobox('loadData', values);
@@ -223,7 +233,8 @@ function setChartMonth(year) {
 		},
 		dataType: 'json',
 		success: function(data) {
-			var values = $('#dChartMonthCombobox').combobox('clear');;
+			$('#dChartMonthCombobox').combobox('loadData',[]);
+			var values = $('#dChartMonthCombobox').combobox('getData');
 			for (var i = 0; i < data.length; i++) {
 				values.push({ value: data[i], text: data[i] });
 				if (i == 0) {

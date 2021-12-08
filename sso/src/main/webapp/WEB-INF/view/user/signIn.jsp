@@ -30,7 +30,6 @@
 		<div class="header">
 			·Î±×ÀÎ
 		</div>
-		<div>
 			<form action="/users/signInCheck" method="POST" id="signInForm" onsubmit="return signInSubmit()">
 				<div class="border">
 					<div class="item">
