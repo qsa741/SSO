@@ -389,7 +389,9 @@ table * {
 	border:1px solid #ddd;
 	border-bottom:none;
 }
-
+.tabs-wrap {
+	width: auto !important;	
+}
 
 /* datagrid */
 .datagrid {
