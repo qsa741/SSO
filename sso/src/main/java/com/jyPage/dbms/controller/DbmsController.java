@@ -41,6 +41,42 @@ public class DbmsController {
 		return "/dbms/sequenceDetails";
 	}
 	
+	// jsp include용 페이지 - view
+	@RequestMapping("/viewDetails")
+	public String viewDetails() {
+		return "/dbms/viewDetails";
+	}
+	
+	// jsp include용 페이지 - function
+	@RequestMapping("/functionDetails")
+	public String functionDetails() {
+		return "/dbms/functionDetails";
+	}
+	
+	// jsp include용 페이지 - function
+	@RequestMapping("/packageDetails")
+	public String packageDetails() {
+		return "/dbms/packageDetails";
+	}
+	
+	// jsp include용 페이지 - function
+	@RequestMapping("/typeDetails")
+	public String typeDetails() {
+		return "/dbms/typeDetails";
+	}
+	
+	// jsp include용 페이지 - procedure
+	@RequestMapping("/procedureDetails")
+	public String procedureDetails() {
+		return "/dbms/procedureDetails";
+	}
+	
+	// jsp include용 페이지 - procedure
+	@RequestMapping("/triggerDetails")
+	public String triggerDetails() {
+		return "/dbms/triggerDetails";
+	}
+	
 	// 추가 table tab 페이지 
 	@RequestMapping("/loadTable")
 	public String loadTable(LoadObjectDTO dto, DbDTO dbDto, Model model) {

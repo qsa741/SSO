@@ -77,6 +77,24 @@ $(document).ready(function() {
 			} else if (node.id == 'SEQUENCE' && node.text != saveClick) {
 				$('#include').empty();
 				$('#include').load('/dbms/sequenceDetails');
+			} else if (node.id == 'VIEW' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/viewDetails');
+			} else if (node.id == 'FUNCTION' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/functionDetails');
+			} else if (node.id == 'PACKAGE' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/packageDetails');
+			} else if (node.id == 'TYPE' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/typeDetails');
+			} else if (node.id == 'PROCEDURE' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/procedureDetails');
+			} else if (node.id == 'TRIGGER' && node.text != saveClick) {
+				$('#include').empty();
+				$('#include').load('/dbms/triggerDetails');
 			}
 			saveClick = node.text;
 			

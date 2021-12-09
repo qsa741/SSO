@@ -1,4 +1,4 @@
-package com.jyPage.common.scheduler;
+package com.jyPage.sso.scheduler;
 
 public interface ScheduleService {
 

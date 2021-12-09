@@ -97,9 +97,9 @@ EasyUI
 #userBtn span {
 	width:30px;
 	height: 2px;
-	border: 2px solid #555;
-	border-radius: 1px;
-	background-color: #555;
+	border: 2px solid #709078;
+	border-radius: 2px;
+	background-color: #709078;
 }
 #userMenu {
 	width:300px;
@@ -232,6 +232,9 @@ EasyUI
 	border-right: none !important;
 	border-left: 0.1px solid #ccc !important;
 }
+.bottom .panel-body {
+	height: 100% !important;
+}
 
 #console {
 	height: 100%;
@@ -299,7 +302,6 @@ table * {
 
 .panel-body {
 	width: 100% !important;
-	height: 100%;
 	border: none;
 } 
 
@@ -330,7 +332,6 @@ table * {
 	background-color: #709078;
 	border-radius: 6px;
 }
-
 
 /* combobox */
 .combo-p .panel-body{

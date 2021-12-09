@@ -23,3 +23,39 @@
 #sequenceDetails {
 	height: 100%;
 }
+
+#viewDetails {
+	height: 100%;
+}
+
+textarea{
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-family: 'Malgun Gothic';
+    resize: none;
+    outline: none;
+    overflow-wrap: normal;
+}
+
+#functionDetails {
+	height: 100%;
+}
+
+#packageDetails {
+	height: 100%;
+}
+
+#typeDetails {
+	height: 100%;
+}
+
+#procedureDetails {
+	height: 100%;
+}
+
+#triggerDetails {
+	height: 100%;
+}
+
