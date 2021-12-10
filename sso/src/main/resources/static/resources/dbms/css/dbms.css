@@ -434,3 +434,8 @@ table * {
 	font-size: 12px;
 }
 
+/* drawer */
+.drawer.layout-collapsed {
+    box-shadow: none;
+    right: -100% !important;
+}
