@@ -249,7 +249,7 @@
 			<div id="userMenu">
 				<c:if test="${sessionScope.JYSESSION != null}">
 					<div onclick="window.location='/users/signOut'">로그아웃</div>
-					<div onclick="$('#drawer').drawer('expand');">그래프</div>
+					<div id="drawerBtn">그래프</div>
 					<div onclick="window.location='/users/modifyUser'">회원정보 수정</div>
 					<div onclick="window.location='/users/deleteUser'">회원 탈퇴</div>
 				</c:if>
@@ -260,8 +260,7 @@
 			</div>
 		</div>
 		<div class="easyui-layout" style="width: 100%; height: 100%;">
-			<div class="side easyui-layout"
-				data-options="region:'west',title:'Schema',split:true">
+			<div class="side easyui-layout" data-options="region:'west',title:'Schema',split:true">
 				<div class="top" data-options="region:'center',split:true">
 					<ul id="dbmsTree" class="easyui-tree">
 					</ul>
@@ -272,44 +271,78 @@
 			</div>
 			<c:if test="${sessionScope.JYDBID == null}">
 				<div class="content easyui-layout" data-options="region:'center',title:'DB ID',split:true">
+					<div class="top" data-options="region:'center',split:true">
+						<div id="centerTabs" class="easyui-tabs">
+							<div class="tab" title="Script" style="display: none;">
+								<div id="scriptToolbar">
+									<button id="runAllSQL" class="easyui-linkbutton"
+										title="전체 실행 (F5)">Run All SQL</button>
+									<button id="runCurrentSQL" class="easyui-linkbutton"
+										title="한줄 실행 (Ctrl + Enter)">Run Current SQL</button>
+								</div>
+								<div id="scriptBody">
+									<textarea id="script" spellcheck="false"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom" data-options="region:'south',split:true">
+						<div id="console">
+							<div id="consoleTabs" class="easyui-tabs" style="width: 100%;">
+								<div class="tab" title="DBMS_OUTPUT" style="display: none;">
+									<table id="dbmsOutput" class="easyui-datagrid"
+										singleSelect="true">
+										<thead>
+											<tr>
+												<th data-options="field:'Row',width:'100px'">Row</th>
+												<th data-options="field:'DbmsOutput',width:'350px'">Dbms Output</th>
+												<th data-options="field:'ExecutionTime'">Execution Time (ms)</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</c:if>
 			<c:if test="${sessionScope.JYDBID != null}">
 				<div class="content easyui-layout" data-options="region:'center',title:'${sessionScope.JYDBID.toUpperCase()}',split:true">
+					<div class="top" data-options="region:'center',split:true">
+						<div id="centerTabs" class="easyui-tabs">
+							<div class="tab" title="Script" style="display: none;">
+								<div id="scriptToolbar">
+									<button id="runAllSQL" class="easyui-linkbutton"
+										title="전체 실행 (F5)">Run All SQL</button>
+									<button id="runCurrentSQL" class="easyui-linkbutton"
+										title="한줄 실행 (Ctrl + Enter)">Run Current SQL</button>
+								</div>
+								<div id="scriptBody">
+									<textarea id="script" spellcheck="false"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom" data-options="region:'south',split:true">
+						<div id="console">
+							<div id="consoleTabs" class="easyui-tabs" style="width: 100%;">
+								<div class="tab" title="DBMS_OUTPUT" style="display: none;">
+									<table id="dbmsOutput" class="easyui-datagrid"
+										singleSelect="true">
+										<thead>
+											<tr>
+												<th data-options="field:'Row',width:'100px'">Row</th>
+												<th data-options="field:'DbmsOutput',width:'350px'">Dbms Output</th>
+												<th data-options="field:'ExecutionTime'">Execution Time (ms)</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</c:if>
-				<div class="top" data-options="region:'center',split:true">
-					<div id="centerTabs" class="easyui-tabs">
-						<div class="tab" title="Script" style="display: none;">
-							<div id="scriptToolbar">
-								<button id="runAllSQL" class="easyui-linkbutton"
-									title="전체 실행 (F5)">Run All SQL</button>
-								<button id="runCurrentSQL" class="easyui-linkbutton"
-									title="한줄 실행 (Ctrl + Enter)">Run Current SQL</button>
-							</div>
-							<div id="scriptBody">
-								<textarea id="script" spellcheck="false"></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bottom" data-options="region:'south',split:true">
-					<div id="console">
-						<div id="consoleTabs" class="easyui-tabs" style="width: 100%;">
-							<div class="tab" title="DBMS_OUTPUT" style="display: none;">
-								<table id="dbmsOutput" class="easyui-datagrid"
-									singleSelect="true">
-									<thead>
-										<tr>
-											<th data-options="field:'Row',width:'100px'">Row</th>
-											<th data-options="field:'DbmsOutput',width:'350px'">Dbms Output</th>
-											<th data-options="field:'ExecutionTime'">Execution Time (ms)</th>
-										</tr>
-									</thead>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div id="drawer" class="easyui-drawer">
 			<div>

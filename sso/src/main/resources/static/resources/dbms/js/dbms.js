@@ -145,6 +145,15 @@ $(document).ready(function() {
 	});
 
 
+	// 그래프 Drawer css 
+	$('#drawerBtn').click(function() {
+		$('.drawer').addClass('chartDrawer');
+		$('#drawer').drawer('expand');
+	});
+	$('.drawer-mask').click(function() {
+		$('.drawer').removeClass('chartDrawer');
+	})
+
 });
 
 

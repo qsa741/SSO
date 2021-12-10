@@ -246,7 +246,11 @@ EasyUI
 }
 
 #drawer {
-	padding: 30px;
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .drawer {
@@ -276,7 +280,10 @@ EasyUI
 #dChart {
 	height: 40%;
 }
-
+ 
+.chartDrawer {
+	display: block !important;
+}
 
 /* Public */
 table * {
@@ -436,6 +443,5 @@ table * {
 
 /* drawer */
 .drawer.layout-collapsed {
-    box-shadow: none;
-    right: -100% !important;
+    display: none;
 }
