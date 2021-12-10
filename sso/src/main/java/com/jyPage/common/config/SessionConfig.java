@@ -17,8 +17,9 @@ public class SessionConfig implements HttpSessionListener {
 	public synchronized static String getSessionIdCheck(String type, String compareId) {
 		String result = "";
 		for (String key : sessions.keySet()) {
-			HttpSession hs = sessions.get(key);
-			if (hs != null && hs.getAttribute(type) != null && hs.getAttribute(type).toString().equals(compareId)) {
+			HttpSession session = sessions.get(key);
+			if (session != null && session.getAttribute(type) != null
+					&& session.getAttribute(type).toString().equals(compareId)) {
 				result = key.toString();
 			}
 		}
@@ -37,16 +38,16 @@ public class SessionConfig implements HttpSessionListener {
 
 	// 세션 로그인 시 sessions에 풋
 	@Override
-	public void sessionCreated(HttpSessionEvent se) {
-		sessions.put(se.getSession().getId(), se.getSession());
+	public void sessionCreated(HttpSessionEvent session) {
+		sessions.put(session.getSession().getId(), session.getSession());
 	}
 
 	// 세션값 지우기
-	@Override 
-	public void sessionDestroyed(HttpSessionEvent se) {
-		if (sessions.get(se.getSession().getId()) != null) {
-			sessions.get(se.getSession().getId()).invalidate();
-			sessions.remove(se.getSession().getId());
+	@Override
+	public void sessionDestroyed(HttpSessionEvent session) {
+		if (sessions.get(session.getSession().getId()) != null) {
+			sessions.get(session.getSession().getId()).invalidate();
+			sessions.remove(session.getSession().getId());
 		}
 	}
 

@@ -52,7 +52,7 @@ public class NetworkServiceImpl implements NetworkService{
 	@Override
 	public void saveUser(Users user, String action) throws Exception {
 		JSONObject json = new JSONObject();
-		json.put("id",saveAgentId + "-02");
+		json.put("id",saveAgentId);
 		// 망이 같으면 DB, 다르면 KAFKA로 타입 전송
 		if(networkCheck(saveAgentNetwork)) {
 			json.put("type", "DB");
@@ -63,7 +63,7 @@ public class NetworkServiceImpl implements NetworkService{
 		json.put("data", user.toString());
 		
 		ssoSQL.saveUserAction(action, user.getId());
-		producer.sendDBMS(json);
+		producer.sendUserSave(json);
 	}
 	
 	// UserAction 테이블을 action 별로 정리 후 json으로 전송

@@ -7,10 +7,17 @@ $(document).ready(function() {
 		}
 	});
 
+	// Pw 유효성 검사
+	$('#pw').textbox({
+		onChange: function(value) {
+			pwValidate(value);
+		}
+	})
+
 	// Pw와 동일 여부 확인
 	$('#pwCheck').textbox({
 		onChange: function(value) {
-			pwValidate(value);
+			pwCheckValidate(value);
 		}
 	});
 
@@ -42,7 +49,8 @@ $(document).ready(function() {
 	// signUpForm Submit 함수
 	$('#signUpForm').submit(function() {
 		var id = $('#id').textbox('textbox').val();
-		var pw = $('#pwCheck').val();
+		var pw = $('#pw').val();
+		var pwCheck = $('#pwCheck').val();
 		var email = $('#email').textbox('textbox').val();
 		var phone = $('#phone').textbox('textbox').val();
 		var dbId = $('#dbId').textbox('textbox').val();
@@ -51,7 +59,10 @@ $(document).ready(function() {
 		if (idValidate(id) == 1) {
 			alert('아이디를 다시 확인해주세요.');
 			return false;
-		} else if (pwValidate(pw) == 1) {
+        } else if (pwValidate(pw) == 1) {
+			alert('비밀번호를 다시 확인해주세요.');
+			return false;
+		} else if (pwCheckValidate(pwCheck) == 1) {
 			alert('비밀번호를 다시 확인해주세요.');
 			return false;
 		} else if (emailValidate(email) == 1) {
@@ -113,21 +124,30 @@ function pwValidate(value) {
 	var pwRegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
 
 	if ($('#pw').textbox('textbox').val() == '영문, 숫자, 특수문자로 8글자 이상' && value == '') {
-		$('#pwCheckMsg').text('');
+		$('#pwMsg').text('');
 		return 1;
 	} else if (pw.length < 8) {
-		$('#pwCheckMsg').text('8글자 이상 입력해주세요.');
+		$('#pwMsg').text('8글자 이상 입력해주세요.');
 		return 1;
 	} else if (pw.length > 20) {
-		$('#pwCheckMsg').text('20글자 이하로 입력해주세요.');
+		$('#pwMsg').text('20글자 이하로 입력해주세요.');
 		return 1;
 	} else if (!pwRegExp.test(value)){
-		$('#pwCheckMsg').text('영문, 숫자, 특수문자가 필수입니다.');
+		$('#pwMsg').text('영문, 숫자, 특수문자가 필수입니다.');
 		return 1;
 	} else if (value == '') {
-		$('#pwCheckMsg').text('비밀번호 확인을 입력해주세요.');
+		$('#pwMsg').text('비밀번호 확인을 입력해주세요.');
 		return 1;
-	} else if (pw != value) {
+	} else {
+		$('#pwMsg').text('');
+		return 0;
+	}
+}
+
+// pwCheck 유효성 검사
+function pwCheckValidate(value) {
+	var pw = $('#pw').val();
+	if (pw != value) {
 		$('#pwCheckMsg').text('비밀번호가 틀립니다.');
 		return 1;
 	} else if (pw == value) {
@@ -215,5 +235,3 @@ function dbConnectionTest() {
 
 	return result;
 }
-
-

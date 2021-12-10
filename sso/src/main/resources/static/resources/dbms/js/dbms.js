@@ -11,7 +11,7 @@ $(document).ready(function() {
 		height: '100%'
 	});
 
-
+	// DBMS 중앙 TEXTAREA 단축키 지정
 	$('#script').keydown(function(e) {
 		// tab키 입력
 		if (e.keyCode === 9) {
@@ -43,6 +43,7 @@ $(document).ready(function() {
 			e.preventDefault();
 		}
 	});
+	
 	// 마우스 클릭시 커서 위치 저장
 	var cursor = 0;
 	$('#script').click(function() {
@@ -109,6 +110,7 @@ $(document).ready(function() {
 				getObjectInfo(node, 'db');
 			}
 		},
+		// 화살표 클릭시 ID에 맞는 하위 목록 불러오기
 		onBeforeExpand: function(node) {
 			if (node.id == 'SCHEMA') {
 				getSchemaInfo(node, 'ex');
@@ -148,6 +150,7 @@ $(document).ready(function() {
 
 // 중앙 div 탭 추가하기
 function addTab(title, url) {
+	// 탭이 존재하면 선택하기
 	if ($('#centerTabs').tabs('exists', title)) {
 		$('#centerTabs').tabs('select', title);
 	} else {
@@ -169,10 +172,10 @@ function folderToggle(node) {
 
 // Script 결과 출력
 function scriptResult(data) {
-	// SQL문이 SELECT일때
+	// SQL SELECT문 결과가 존재
 	if (data.size != 0) {
 		consoleAddTab(data);
-		// SELECT 외 다른 명령어 처리
+	// 나머지 경우
 	} else {
 		dbmsOutput(data.data);
 	}
@@ -207,7 +210,7 @@ function consoleAddTab(data) {
 	}
 }
 
-// CREATE, DROP, INSERT, DELETE, UPDATE 실행 시 DBMS_OUTPUT 텍스트 추가
+// DBMS OUTPUT 메세지가 존재할 시 DBMS_OUTPUT 텍스트 추가
 function dbmsOutput(data) {
 	$('#consoleTabs').tabs('select', 'DBMS_OUTPUT');
 	$('#dbmsOutput').datagrid('appendRow', {
@@ -306,7 +309,7 @@ function setMChart(year) {
 					plugins: {
 						title: {
 							display: true,
-							text: 'USERS 월별 통계'
+							text: '사용자 월별 통계'
 						}
 					},
 					scales: {
@@ -350,7 +353,7 @@ function setDChart(year, month) {
 					plugins: {
 						title: {
 							display: true,
-							text: 'USERS 일별 통계'
+							text: '사용자 일별 통계'
 						}
 					},
 					scales: {

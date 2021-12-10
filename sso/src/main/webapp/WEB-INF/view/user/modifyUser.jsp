@@ -28,8 +28,11 @@
 					${sessionScope.JYSESSION}
 				</div>
 				<div class="item">
-					<div class="row2">
-						<label>비밀번호&nbsp;<span class="essential">*</span></label>
+					<div class="row">
+						<div class="row2">
+							<label>비밀번호&nbsp;<span class="essential">*</span></label>
+							<div class="msg" id="pwMsg"></div>
+						</div>
 					</div>
 					<input class="easyui-passwordbox" iconWidth="28" id="pw" name="pw" prompt="영문, 숫자, 특수문자로 8글자 이상" value="${user.pw}">
 				</div>

@@ -20,61 +20,61 @@ public class DbmsController {
 	// jsp include용 페이지 - schema
 	@RequestMapping("/schemaDetails")
 	public String schemaDetails() {
-		return "/dbms/schemaDetails";
+		return "/dbms/details/schemaDetails";
 	}
 	
 	// jsp include용 페이지 - table
 	@RequestMapping("/tableDetails")
 	public String tableDetails() {
-		return "/dbms/tableDetails";
+		return "/dbms/details/tableDetails";
 	}
 	
 	// jsp include용 페이지 - index
 	@RequestMapping("/indexDetails")
 	public String indexDetails() {
-		return "/dbms/indexDetails";
+		return "/dbms/details/indexDetails";
 	}
 	
 	// jsp include용 페이지 - sequence
 	@RequestMapping("/sequenceDetails")
 	public String sequenceDetails() {
-		return "/dbms/sequenceDetails";
+		return "/dbms/details/sequenceDetails";
 	}
 	
 	// jsp include용 페이지 - view
 	@RequestMapping("/viewDetails")
 	public String viewDetails() {
-		return "/dbms/viewDetails";
+		return "/dbms/details/viewDetails";
 	}
 	
 	// jsp include용 페이지 - function
 	@RequestMapping("/functionDetails")
 	public String functionDetails() {
-		return "/dbms/functionDetails";
+		return "/dbms/details/functionDetails";
 	}
 	
 	// jsp include용 페이지 - function
 	@RequestMapping("/packageDetails")
 	public String packageDetails() {
-		return "/dbms/packageDetails";
+		return "/dbms/details/packageDetails";
 	}
 	
 	// jsp include용 페이지 - function
 	@RequestMapping("/typeDetails")
 	public String typeDetails() {
-		return "/dbms/typeDetails";
+		return "/dbms/details/typeDetails";
 	}
 	
 	// jsp include용 페이지 - procedure
 	@RequestMapping("/procedureDetails")
 	public String procedureDetails() {
-		return "/dbms/procedureDetails";
+		return "/dbms/details/procedureDetails";
 	}
 	
-	// jsp include용 페이지 - procedure
+	// jsp include용 페이지 - trigger
 	@RequestMapping("/triggerDetails")
 	public String triggerDetails() {
-		return "/dbms/triggerDetails";
+		return "/dbms/details/triggerDetails";
 	}
 	
 	// 추가 table tab 페이지 
