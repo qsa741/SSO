@@ -13,8 +13,7 @@
 				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsInfo',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -25,8 +24,7 @@
 				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsRoleGrants',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -36,9 +34,8 @@
 			$.ajax({
 				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsSystemPrivileges',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text,
-					dbId : dbId,
-					dbPw : dbPw
+					schema : $('#dbmsTree').tree('getSelected').text, 
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -48,9 +45,8 @@
 			$.ajax({
 				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsExtents',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text,
-					dbId : dbId,
-					dbPw : dbPw
+					schema : $('#dbmsTree').tree('getSelected').text, 
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {

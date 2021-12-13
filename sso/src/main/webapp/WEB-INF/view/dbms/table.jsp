@@ -14,8 +14,7 @@ $(document).ready(function() {
 			schema : '${dto.schema}',
 			objectType : '${dto.objectType}',
 			objectName : '${dto.objectName}',
-			dbId : '${dbDto.dbId}',
-			dbPw : '${dbDto.dbPw}'
+			userId : '${userId}'
 		},
 		dataType : 'json',
 		success :  function(data) {
@@ -38,5 +37,7 @@ $(document).ready(function() {
 	});
 });
 </script>
-<table class="easyui-datagrid" id="dbmsDatagrid" singleSelect="true" style="width:;height:100%;overflow:auto;">
-</table>
+<body style="overflow:hidden;">
+	<table class="easyui-datagrid" id="dbmsDatagrid" singleSelect="true" style="height:100%;overflow:auto;">
+	</table>
+</body>

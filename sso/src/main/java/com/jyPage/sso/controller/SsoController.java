@@ -45,7 +45,7 @@ public class SsoController {
 		int res = ssoService.signIn(user, auto, response);
 		String view = "";
 		if (res == 1) {
-			view = "redirect:/dbms/dbms";
+			view = "/dbms/dbms";
 		} else {
 			view = "/user/signIn";
 		}

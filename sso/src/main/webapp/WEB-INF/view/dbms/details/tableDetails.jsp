@@ -22,8 +22,7 @@
 				data : {
 					table : node.text,
 					schema : schema.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -35,8 +34,7 @@
 				data : {
 					table : node.text,
 					schema : schema.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -48,8 +46,7 @@
 				data : {
 					table : node.text,
 					schema : schema.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -62,8 +59,7 @@
 						url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsIndexesBottom',
 						data : {
 							indexName : row.INDEX_NAME,
-							dbId : dbId,
-							dbPw : dbPw
+							userId : userId
 						},
 						dataType: 'json',
 						success : function(data) {
@@ -78,8 +74,7 @@
 				data : {
 					table : node.text,
 					schema : schema.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId: userId
 				},
 				dataType: 'json',
 				success : function(data) {

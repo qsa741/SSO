@@ -17,8 +17,7 @@
 				data : {
 					schema : schema.text,
 					triggerName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {

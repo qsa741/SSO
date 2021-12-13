@@ -14,20 +14,19 @@
 				url : 'http://10.47.39.102:8080/dbmsTool/indexDetailsIndex',
 				data : {
 					indexName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
 					$('#indexDetailsIndex').datagrid({data});
 				}
 			});
+			
 			$.ajax({
 				url : 'http://10.47.39.102:8080/dbmsTool/indexDetailsColumns',
 				data : {
 					indexName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {

@@ -17,8 +17,7 @@
 				data : {
 					schema : schema.text,
 					viewName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
@@ -30,8 +29,7 @@
 				data : {
 					schema : schema.text,
 					viewName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {

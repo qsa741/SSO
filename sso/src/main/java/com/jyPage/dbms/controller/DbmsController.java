@@ -79,9 +79,9 @@ public class DbmsController {
 	
 	// 추가 table tab 페이지 
 	@RequestMapping("/loadTable")
-	public String loadTable(LoadObjectDTO dto, DbDTO dbDto, Model model) {
+	public String loadTable(LoadObjectDTO dto, String userId, Model model) {
 		model.addAttribute("dto", dto);
-		model.addAttribute("dbDto", dbDto);
+		model.addAttribute("userId", userId);
 
 		return "/dbms/table";
 	}

@@ -13,9 +13,8 @@
 			$.ajax({
 				url : 'http://10.47.39.102:8080/dbmsTool/sequenceDetailsInfo',
 				data : {
-					sequenceName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					sequenceName : node.text, 
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {

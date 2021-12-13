@@ -1,69 +1,23 @@
+var userId;
 $(document).ready(function() {
+	userId = $('#userLabel label').text();
+
+	// dbmsTree 초기 데이터 세팅
+	$.ajax({
+		url : 'http://10.47.39.102:8080/dbmsTool/allSchemas',
+		data : {
+			userId : userId
+		},
+		dataType : 'json'
+	}).done(function (data){
+		$('#dbmsTree').tree('loadData',data);
+	})
 	
-	// 처음 오픈시 전체 스키마 불러오기
-	//$('#dbmsTree').tree({
-	//	url: 'http://10.47.39.102:8080/dbmsTool/allSchemas',
-	//	height: '100%'
-	//});
-
-	// 중앙 탭 높이 설정
-	$('#centerTabs').tabs({
-		height: '100%'
-	});
-
-	// DBMS 중앙 TEXTAREA 단축키 지정
-	$('#script').keydown(function(e) {
-		// tab키 입력
-		if (e.keyCode === 9) {
-			// 커서의 위치 저장
-			var start = this.selectionStart;
-			var end = this.selectionEnd;
-
-			var $this = $(this);
-			var value = $this.val();
-
-			// 시작 위치와 끝 위치 사이에 '\t' 넣기
-			$this.val(value.substring(0, start)
-				+ "\t"
-				+ value.substring(end));
-
-			// 커서 위치 탭 다음으로 바꾸기
-			this.selectionStart = this.selectionEnd = start + 1;
-
-			// 기본 이벤트 막기
-			e.preventDefault();
-		}
-		// Ctrl + Enter 입력
-		if (e.keyCode == 13 && e.ctrlKey) {
-			runCurrentSQL(this.selectionEnd);
-		}
-		// F5 입력
-		if (e.keyCode == 116) {
-			runAllSQL();
-			e.preventDefault();
-		}
-	});
-	
-	// 마우스 클릭시 커서 위치 저장
-	var cursor = 0;
-	$('#script').click(function() {
-		cursor = this.selectionEnd;
-	});
-
-	// 마지막으로 선택된 SQL 한줄 실행
-	$('#runCurrentSQL').click(function() {
-		runCurrentSQL(cursor);
-	});
-
-	// SQL 전체 실행
-	$('#runAllSQL').click(function() {
-		runAllSQL();
-	});
-
 	// 이전 클릭 위치 저장
 	var saveClick;
-	// 클릭 이벤트	
+	// 기본 세팅 및 클릭 이벤트
 	$('#dbmsTree').tree({
+		height: '100%',
 		// 클릭시 ID에 맞는 디테일 정보 불러오기
 		onClick: function(node) {
 			if (node.id == 'SCHEMA' && node.text != saveClick) {
@@ -121,7 +75,60 @@ $(document).ready(function() {
 			}
 		}
 		
-		
+	});
+	
+	// 중앙 탭 높이 설정
+	$('#centerTabs').tabs({
+		height: '100%'
+	});
+
+	// DBMS 중앙 TEXTAREA 단축키 지정
+	$('#script').keydown(function(e) {
+		// tab키 입력
+		if (e.keyCode === 9) {
+			// 커서의 위치 저장
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
+
+			var $this = $(this);
+			var value = $this.val();
+
+			// 시작 위치와 끝 위치 사이에 '\t' 넣기
+			$this.val(value.substring(0, start)
+				+ "\t"
+				+ value.substring(end));
+
+			// 커서 위치 탭 다음으로 바꾸기
+			this.selectionStart = this.selectionEnd = start + 1;
+
+			// 기본 이벤트 막기
+			e.preventDefault();
+		}
+		// Ctrl + Enter 입력
+		if (e.keyCode == 13 && e.ctrlKey) {
+			runCurrentSQL(this.selectionEnd);
+		}
+		// F5 입력
+		if (e.keyCode == 116) {
+			runAllSQL();
+			e.preventDefault();
+		}
+	});
+	
+	// 마우스 클릭시 커서 위치 저장
+	var cursor = 0;
+	$('#script').click(function() {
+		cursor = this.selectionEnd;
+	});
+
+	// 마지막으로 선택된 SQL 한줄 실행
+	$('#runCurrentSQL').click(function() {
+		runCurrentSQL(cursor);
+	});
+
+	// SQL 전체 실행
+	$('#runAllSQL').click(function() {
+		runAllSQL();
 	});
 
 	// 차트 초기값 세팅
@@ -147,7 +154,7 @@ $(document).ready(function() {
 
 	// 그래프 Drawer css 
 	$('#drawerBtn').click(function() {
-		$('.drawer').addClass('chartDrawer');
+		$('.drawer').addClass('chartDrawer');	
 		$('#drawer').drawer('expand');
 	});
 	$('.drawer-mask').click(function() {
@@ -155,7 +162,177 @@ $(document).ready(function() {
 	})
 
 });
+// 스키마 하위 목록 불러오기
+function getSchemaInfo(node, type) {
+	if (node.children == null) {
+		$.ajax({
+			url: 'http://10.47.39.102:8080/dbmsTool/schemaInfo',
+			data: {
+				schema: node.text,
+				userId : userId
+			},
+			dataType: 'json',
+			success: function(data) {
+				if (data == null) {
+					sessionOut();
+				} else {
+					if(type == 'ex'){
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+					$('#dbmsTree').tree('append', {
+						parent: node.target,
+						data: data,
+					});
+					if(type == 'ex') {
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+				}
+			}
+		}).done(function() {
+			if(type == 'db') {
+				folderToggle(node);
+			}
+		});
+	} else {
+		if(type == 'db') {
+			folderToggle(node);
+		}
+	}
+}
 
+// 오브젝트 하위 목록 불러오기
+function getObjectInfo(node, type) {
+	var root = $('#dbmsTree').tree('getRoot', node.target);
+	if (node.children == null) {
+		$.ajax({
+			url: 'http://10.47.39.102:8080/dbmsTool/objectInfo',
+			data: {
+				id: root.text,
+				object: node.id,
+				userId: userId
+			},
+			dataType: 'json',
+			success: function(data) {
+				if (data == null) {
+					sessionOut();
+				} else {
+					if(type == 'ex'){
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+					$('#dbmsTree').tree('append', {
+						parent: node.target,
+						data: data
+					});
+					if(type == 'ex'){
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+				}
+			}
+		}).done(function() {
+			if(type == 'db') {
+				folderToggle(node);
+			}
+		});
+	} else {
+		if(type == 'db') {
+			folderToggle(node);
+		}
+	}
+}
+
+// 테이블 정보 불러오기
+function loadObjectTable(node, type) {
+	if(type == 'db') {
+		var root = $('#dbmsTree').tree('getRoot', node.target);
+		addTab(node.text, '/dbms/loadTable?schema=' + root.text + '&objectType=' + node.id + '&objectName=' + node.text + '&userId=' + userId);
+	}
+	getTableChildren(node, type);
+}
+
+// 테이블 자식 정보 불러오기 (Column, Constraint, Index)
+function getTableChildren(node, type) {
+	// 선택 노드가 Table이고 하위 항목이 없을시 실행
+	if (node.id == 'TABLE' && node.children == null) {
+		var root = $('#dbmsTree').tree('getRoot', node.target);
+		$.ajax({
+			url: 'http://10.47.39.102:8080/dbmsTool/getTableChildren',
+			data: {
+				schema: root.text,
+				objectType: node.id,
+				objectName: node.text,
+				userId: userId
+			},
+			dataType: 'json',
+			success: function(data) {
+				if (data == null) {
+					sessionOut();
+				} else {
+					if(type == 'ex'){
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+					$('#dbmsTree').tree('append', {
+						parent: node.target,
+						data: data.children
+					});
+					if(type == 'ex'){
+						$('#dbmsTree').tree('toggle', node.target);
+					}
+				}
+			}
+		}).done(function() {
+			if(type == 'db') {
+				folderToggle(node);
+			}
+		});
+	} else {
+		if(type == 'db') {
+			folderToggle(node);
+		}
+	}
+}
+
+// SQL 한줄 실행
+function runCurrentSQL(cursor) {
+	$('#dbmsOutput').datagrid('loadData', []);
+	var text = $('#script').val();
+	$.ajax({
+		url: 'http://10.47.39.102:8080/dbmsTool/runCurrentSQL',
+		data: {
+			sql: text,
+			cursor: cursor,
+			userId: userId
+		},
+		dataType: 'json',
+		success: function(data) {
+			scriptResult(data);
+		},
+		error: function(e) {
+			sessionOut();
+		}
+	});
+}
+
+// SQL 전체 실행
+function runAllSQL() {
+	$('#dbmsOutput').datagrid('loadData', []);
+	var text = $('#script').val();
+	$.ajax({
+		url: 'http://10.47.39.102:8080/dbmsTool/runAllSQL',
+		data: {
+			sqls: text,
+			userId: userId
+		},
+		dataType: 'json',
+		success: function(dataArray) {
+			for (var i = 0; i < dataArray.length; i++) {
+				scriptResult(dataArray[i]);
+			}
+		},
+		error: function(e) {
+			sessionOut();
+		}
+	});
+}
 
 // 중앙 div 탭 추가하기
 function addTab(title, url) {

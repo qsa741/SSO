@@ -18,8 +18,7 @@
 				data : {
 					schema : schema.text,
 					functionName : node.text,
-					dbId : dbId,
-					dbPw : dbPw
+					userId : userId
 				},
 				dataType: 'json',
 				success : function(data) {
