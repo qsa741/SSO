@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Users {
-	
+
 	@Id
 	private String id;
 	private String pw;
@@ -66,15 +66,15 @@ public class Users {
 	public void setDbPw(String dbPw) {
 		this.dbPw = dbPw;
 	}
-	
+
 	public String getState() {
 		return state;
 	}
-	
+
 	public void setState(String state) {
 		this.state = state;
 	}
-	
+
 	public Date getSignUpDate() {
 		return signUpDate;
 	}
@@ -90,11 +90,12 @@ public class Users {
 	public void setUnSignDate(Date unSignDate) {
 		this.unSignDate = unSignDate;
 	}
-	
+
 	public Users() {
 	}
 
-	public Users(String id, String pw, String email, String phone, String dbId, String dbPw, String state, Date signUpDate, Date unSignDate) {
+	public Users(String id, String pw, String email, String phone, String dbId, String dbPw, String state,
+			Date signUpDate, Date unSignDate) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -106,20 +107,13 @@ public class Users {
 		this.unSignDate = unSignDate;
 		this.state = state;
 	}
-	
+
 	// json 형태로 반환
 	@Override
 	public String toString() {
-		return "{" 
-				+ "\"id\":\""+id+"\","
-				+ "\"pw\":\""+pw+"\","
-				+ "\"email\":\""+email+"\","
-				+ "\"phone\":\""+phone+"\","
-				+ "\"dbId\":\""+dbId+"\","
-				+ "\"dbPw\":\""+dbPw+"\","
-				+ "\"signUpDate\":\""+signUpDate+"\","
-				+ "\"unSignDate\":\""+unSignDate+"\","
-				+ "\"state\":\""+state+"\""
-				+ "}";
+		return "{" + "\"id\":\"" + id + "\"," + "\"pw\":\"" + pw + "\"," + "\"email\":\"" + email + "\","
+				+ "\"phone\":\"" + phone + "\"," + "\"dbId\":\"" + dbId + "\"," + "\"dbPw\":\"" + dbPw + "\","
+				+ "\"signUpDate\":\"" + signUpDate + "\"," + "\"unSignDate\":\"" + unSignDate + "\"," + "\"state\":\""
+				+ state + "\"" + "}";
 	}
 }

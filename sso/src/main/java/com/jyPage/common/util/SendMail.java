@@ -14,7 +14,7 @@ public class SendMail {
 
 	static final String host = "smtp.naver.com"; // google일경우 smtp.gmail.com
 	static final String username = "qsa741"; // 보내는 사람(이메일)
-	static final String password = "@YJYoung@95"; // 비밀번호
+	static final String password = ""; // 비밀번호
 	static final int port = 465;
 
 	public void sendPassword(Users user) throws Exception {

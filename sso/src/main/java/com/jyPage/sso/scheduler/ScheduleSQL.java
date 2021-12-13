@@ -41,7 +41,7 @@ public class ScheduleSQL {
 		Connection conn = null;
 		PreparedStatement pre = null;
 		ResultSet result = null;
-		
+
 		Class.forName(driver);
 		conn = DriverManager.getConnection(url, username, password);
 		pre = conn.prepareStatement(sql);
@@ -51,21 +51,21 @@ public class ScheduleSQL {
 
 		Map<String, Object> map;
 		String col;
-		
+
 		while (result.next()) {
 			map = new LinkedHashMap<>();
-			
+
 			for (int i = 0; i < 4; i++) {
 				col = metaData.getColumnName(i + 1);
 				map.put(col, result.getString(col));
 			}
-			
+
 			list.add(map);
 			pre = conn.prepareStatement(sql2);
 			pre.setString(1, (String) map.get("SCHEDULENUM"));
 			pre.executeUpdate();
 		}
-		
+
 		result.close();
 		pre.close();
 		conn.close();
@@ -81,12 +81,12 @@ public class ScheduleSQL {
 		Connection conn = null;
 		PreparedStatement pre = null;
 		ResultSet result = null;
-		
+
 		Class.forName(driver);
 		conn = DriverManager.getConnection(url, username, password);
 		pre = conn.prepareStatement(sql);
 		result = pre.executeQuery();
-		
+
 		result.close();
 		pre.close();
 		conn.close();

@@ -12,7 +12,7 @@ import com.jyPage.sso.service.SsoServiceImpl;
 @RestController
 @RequestMapping("/users")
 public class SsoRestController {
-	
+
 	@Autowired
 	private SsoServiceImpl ssoService;
 
@@ -21,17 +21,10 @@ public class SsoRestController {
 	public long signUpCheck(Users user) {
 		return ssoService.signUpCheck(user);
 	}
-	
+
 	// Email 확인
 	@RequestMapping(value = "/emailCheck")
 	public long emailCheck(Users user) {
 		return ssoService.emailCheck(user);
-	}
-	
-	@RequestMapping("/test")
-	public void test() {
-		System.out.println(RequestContextHolder.getRequestAttributes().getSessionId());
-		System.out.println(RequestContextHolder.getRequestAttributes().getAttribute("JYDBID",
-				RequestAttributes.SCOPE_SESSION));
 	}
 }

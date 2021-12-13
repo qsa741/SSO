@@ -66,7 +66,7 @@
 				</div>
 			</div>
 			<c:if test="${sessionScope.JYDBID == null}">
-				<div class="content easyui-layout" data-options="region:'center',title:'DB ID',split:true">
+				<div class="content easyui-layout" data-options="region:'center',title:'DB ID is null',split:true">
 					<div class="top" data-options="region:'center',split:true">
 						<div id="centerTabs" class="easyui-tabs">
 							<div class="tab" title="Script" style="display: none;">
@@ -103,7 +103,7 @@
 				</div>
 			</c:if>
 			<c:if test="${sessionScope.JYDBID != null}">
-				<div class="content easyui-layout" data-options="region:'center',title:'${sessionScope.JYDBID.toUpperCase()}',split:true">
+				<div class="content easyui-layout" data-options="region:'center',title:'DB ID : ${sessionScope.JYDBID.toUpperCase()}',split:true">
 					<div class="top" data-options="region:'center',split:true">
 						<div id="centerTabs" class="easyui-tabs">
 							<div class="tab" title="Script" style="display: none;">

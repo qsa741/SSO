@@ -150,7 +150,7 @@ public class SsoServiceImpl implements SsoService {
 							RequestAttributes.SCOPE_SESSION);
 					RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW", aes.decrypt(newUser.getDbPw()),
 							RequestAttributes.SCOPE_SESSION);
-					
+
 					ssoSQL.saveUserAction("R", user.getId());
 					if (auto != null) {
 						Cookie cookie = new Cookie("auto", user.getId());

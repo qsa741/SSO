@@ -22,8 +22,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 		}
-		
-		if(path.contains("/users/signUp") || path.contains("/users/signIn")) {
+
+		if (path.contains("/users/signUp") || path.contains("/users/signIn")) {
 			if (session.getAttribute("JYSESSION") != null) {
 				response.sendRedirect("/dbms/dbms");
 				return false;
@@ -32,5 +32,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 		return true;
 	}
-	
+
 }
