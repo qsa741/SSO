@@ -12,7 +12,6 @@ public class ExceptionController {
 	// 에러 발생시 에러 메세지와 함께 에러페이지 보여주기
 	@ExceptionHandler(JYException.class)
 	public ModelAndView handleError(JYException e) {
-		System.out.println("ERROR CODE");
 		ModelAndView mView = new ModelAndView();
 
 		mView.addObject("exception", e);

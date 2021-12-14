@@ -13,14 +13,12 @@ public class WebErrorController implements ErrorController {
 
 	@Override
 	public String getErrorPath() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	// 에러 발생시 에러 코드와 함께 에러페이지 보여주기
 	@RequestMapping("/error")
 	public String handleError(HttpServletRequest request, Model model) {
-		System.out.println("ERROR PAGE");
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
 		if (status != null) {
@@ -30,4 +28,5 @@ public class WebErrorController implements ErrorController {
 		
 		return "error/error";
 	}
+	
 }
