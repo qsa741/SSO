@@ -16,14 +16,21 @@ body {
 	margin-bottom:40px;
 }
 
+p {
+	margin-bottom:30px;
+	font-size:30px;
+}
+
 button {
-	background-color:#6aaaff;
-	height:40px;
-	border: none;
-	border-radius:10px;
-	color: #fff;
+	background-color: #709078;
+    height: 40px;
+    font-size: 15px;
+    width: 165px;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
 }
 
 button:hover {
-	background-color:#5a9aef;
+	background-color:#80a088;
 }

@@ -3,9 +3,7 @@ package com.jyPage.sso.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-
+import com.jyPage.exception.JYException;
 import com.jyPage.sso.entity.Users;
 import com.jyPage.sso.service.SsoServiceImpl;
 
@@ -23,8 +21,13 @@ public class SsoRestController {
 	}
 
 	// Email 확인
-	@RequestMapping(value = "/emailCheck")
+	@RequestMapping("/emailCheck")
 	public long emailCheck(Users user) {
 		return ssoService.emailCheck(user);
+	}
+	
+	@RequestMapping("/errorTest")
+	public void errorTest() throws JYException {
+		throw new JYException("test");
 	}
 }

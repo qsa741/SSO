@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jyPage.dbms.dto.DbDTO;
 import com.jyPage.dbms.dto.LoadObjectDTO;
 
 @RequestMapping("/dbms")

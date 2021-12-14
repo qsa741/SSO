@@ -31,7 +31,7 @@ public class SsoController {
 
 		// 자동로그인시 메인으로 이동
 		if (ssoService.autoSignInCheck(request)) {
-			view = "/dbms/dbms";
+			view = "redirect:/dbms/dbms";
 		} else {
 			view = "/user/signIn";
 		}
@@ -45,7 +45,7 @@ public class SsoController {
 		int res = ssoService.signIn(user, auto, response);
 		String view = "";
 		if (res == 1) {
-			view = "/dbms/dbms";
+			view = "redirect:/dbms/dbms";
 		} else {
 			view = "/user/signIn";
 		}

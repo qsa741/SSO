@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,14 +30,21 @@ public class SsoServiceImpl implements SsoService {
 	private UsersRepository userRepository;
 
 	@Autowired
-	private SsoSQL ssoSQL;
+	private NetworkServiceImpl networkService;
 
 	@Autowired
-	private NetworkServiceImpl networkService;
+	private SsoSQL ssoSQL;
+
+	@Value("${sso.properties.session-id}")
+	private String sessionID;
+	@Value("${sso.properties.session-db-id}")
+	private String sessionDBID;
+	@Value("${sso.properties.session-db-pw}")
+	private String sessionDBPW;
 
 	// 세션 ID 가져오기
 	public String sessionID() {
-		return (String) RequestContextHolder.getRequestAttributes().getAttribute("JYSESSION",
+		return (String) RequestContextHolder.getRequestAttributes().getAttribute(sessionID,
 				RequestAttributes.SCOPE_SESSION);
 	}
 
@@ -102,13 +110,13 @@ public class SsoServiceImpl implements SsoService {
 			if (cookies != null) {
 				for (Cookie c : cookies) {
 					if (c.getName().equals("auto")) {
-						SessionConfig.getSessionIdCheck("JYSESSION", c.getValue());
-						RequestContextHolder.getRequestAttributes().setAttribute("JYSESSION", c.getValue(),
+						SessionConfig.getSessionIdCheck(sessionID, c.getValue());
+						RequestContextHolder.getRequestAttributes().setAttribute(sessionID, c.getValue(),
 								RequestAttributes.SCOPE_SESSION);
 						Users newUser = userRepository.findById(c.getValue()).get();
-						RequestContextHolder.getRequestAttributes().setAttribute("JYDBID", newUser.getDbId(),
+						RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
 								RequestAttributes.SCOPE_SESSION);
-						RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW",
+						RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW,
 								aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
 						ssoSQL.saveUserAction("R", c.getValue());
 						return true;
@@ -117,9 +125,9 @@ public class SsoServiceImpl implements SsoService {
 			}
 		} else {
 			Users newUser = userRepository.findById(sid).get();
-			RequestContextHolder.getRequestAttributes().setAttribute("JYDBID", newUser.getDbId(),
+			RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
 					RequestAttributes.SCOPE_SESSION);
-			RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW", aes.decrypt(newUser.getDbPw()),
+			RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW, aes.decrypt(newUser.getDbPw()),
 					RequestAttributes.SCOPE_SESSION);
 			ssoSQL.saveUserAction("R", sid);
 			return true;
@@ -143,13 +151,13 @@ public class SsoServiceImpl implements SsoService {
 				String pw = aes.decrypt(newUser.getPw());
 
 				if (pw.equals(user.getPw())) {
-					SessionConfig.getSessionIdCheck("JYSESSION", user.getId());
-					RequestContextHolder.getRequestAttributes().setAttribute("JYSESSION", user.getId(),
+					SessionConfig.getSessionIdCheck(sessionID, user.getId());
+					RequestContextHolder.getRequestAttributes().setAttribute(sessionID, user.getId(),
 							RequestAttributes.SCOPE_SESSION);
-					RequestContextHolder.getRequestAttributes().setAttribute("JYDBID", newUser.getDbId(),
+					RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
 							RequestAttributes.SCOPE_SESSION);
-					RequestContextHolder.getRequestAttributes().setAttribute("JYDBPW", aes.decrypt(newUser.getDbPw()),
-							RequestAttributes.SCOPE_SESSION);
+					RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW,
+							aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
 
 					ssoSQL.saveUserAction("R", user.getId());
 					if (auto != null) {
