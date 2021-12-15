@@ -6,11 +6,10 @@ public class JYException extends Exception {
 
 	public JYException(String msg) {
 		super(msg);
-		System.out.println("에러 발생 : " + msg);
 	}
 
 	public JYException(String msg, Throwable cause) {
 		super(msg, cause);
-		System.out.println("에러 발생 : " + msg);
+		cause.printStackTrace();
 	}
 }
