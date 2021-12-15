@@ -5,13 +5,14 @@
 	});
 	
 	$(document).ready(function() {
+		var url = 'http://10.47.39.102:8080';
 		if(${sessionScope.JYDBID eq null}) {
 			alert('세션이 만료되었습니다. 로그인이 필요합니다.');
 			window.location='/users/signOut';
 		} else {
 			var node = $('#dbmsTree').tree('getSelected');
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/indexDetailsIndex',
+				url : url + '/dbmsTool/indexDetailsIndex',
 				data : {
 					indexName : node.text,
 					userId : userId
@@ -23,7 +24,7 @@
 			});
 			
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/indexDetailsColumns',
+				url : url + '/dbmsTool/indexDetailsColumns',
 				data : {
 					indexName : node.text,
 					userId : userId

@@ -1,5 +1,6 @@
 package com.jyPage.dbms.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,9 @@ import com.jyPage.dbms.dto.LoadObjectDTO;
 @Controller
 public class DbmsController {
 
+	@Value("${dbms.url}")
+	private String url;
+	
 	// DBMS 페이지
 	@RequestMapping("/dbms")
 	public String dbms() {
@@ -81,7 +85,8 @@ public class DbmsController {
 	public String loadTable(LoadObjectDTO dto, String userId, Model model) {
 		model.addAttribute("dto", dto);
 		model.addAttribute("userId", userId);
-
+		model.addAttribute("url", url);
+		
 		return "/dbms/table";
 	}
 

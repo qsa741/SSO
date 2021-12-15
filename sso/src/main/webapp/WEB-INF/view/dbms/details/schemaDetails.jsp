@@ -5,12 +5,13 @@
 	});
 	
 	$(document).ready(function() {
+		var url = 'http://10.47.39.102:8080';
 		if(${sessionScope.JYDBID eq null}) {
 			alert('세션이 만료되었습니다. 로그인이 필요합니다.');
 			window.location='/users/signOut';
 		} else {
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsInfo',
+				url : url + '/dbmsTool/schemaDetailsInfo',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text,
 					userId : userId
@@ -21,7 +22,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsRoleGrants',
+				url : url + '/dbmsTool/schemaDetailsRoleGrants',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text,
 					userId : userId
@@ -32,7 +33,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsSystemPrivileges',
+				url : url + '/dbmsTool/schemaDetailsSystemPrivileges',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text, 
 					userId : userId
@@ -43,7 +44,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/schemaDetailsExtents',
+				url : url + '/dbmsTool/schemaDetailsExtents',
 				data : {
 					schema : $('#dbmsTree').tree('getSelected').text, 
 					userId : userId

@@ -6,6 +6,7 @@
 	});
 	
 	$(document).ready(function() {
+		var url = 'http://10.47.39.102:8080';
 		if(${sessionScope.JYDBID eq null}) {
 			alert('세션이 만료되었습니다. 로그인이 필요합니다.');
 			window.location='/users/signOut';
@@ -18,7 +19,7 @@
 			var parent = $('#dbmsTree').tree('getParent', node.target);
 			var schema = $('#dbmsTree').tree('getParent', parent.target);
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsTable',
+				url : url + '/dbmsTool/tableDetailsTable',
 				data : {
 					table : node.text,
 					schema : schema.text,
@@ -30,7 +31,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsColumns',
+				url : url + '/dbmsTool/tableDetailsColumns',
 				data : {
 					table : node.text,
 					schema : schema.text,
@@ -42,7 +43,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsIndexesTop',
+				url : url + '/dbmsTool/tableDetailsIndexesTop',
 				data : {
 					table : node.text,
 					schema : schema.text,
@@ -56,7 +57,7 @@
 			$('#tableDetailsIndexesTop').datagrid({
 				onSelect : function(index, row) {
 					$.ajax({
-						url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsIndexesBottom',
+						url : url + '/dbmsTool/tableDetailsIndexesBottom',
 						data : {
 							indexName : row.INDEX_NAME,
 							userId : userId
@@ -70,7 +71,7 @@
 			});
 			$('#tableDetailsIndexesBottom').datagrid(null);
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsConstraints',
+				url : url + '/dbmsTool/tableDetailsConstraints',
 				data : {
 					table : node.text,
 					schema : schema.text,
@@ -82,7 +83,7 @@
 				}
 			});
 			$.ajax({
-				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsScript',
+				url : url + '/dbmsTool/tableDetailsScript',
 				data : {
 					table : node.text,
 					schema : schema.text,

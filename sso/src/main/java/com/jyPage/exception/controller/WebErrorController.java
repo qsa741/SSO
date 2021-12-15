@@ -26,6 +26,6 @@ public class WebErrorController implements ErrorController {
 			model.addAttribute("code", statusCode);
 		}
 		
-		return "error/error";
+		return "/error/error";
 	}
 }

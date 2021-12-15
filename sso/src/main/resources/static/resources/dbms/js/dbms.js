@@ -1,10 +1,12 @@
 var userId;
+var url;
 $(document).ready(function() {
 	userId = $('#userLabel label').text();
-
+	url = 'http://10.47.39.102:8080';
+	
 	// dbmsTree 초기 데이터 세팅
 	$.ajax({
-		url : 'http://10.47.39.102:8080/dbmsTool/allSchemas',
+		url : url + '/dbmsTool/allSchemas',
 		data : {
 			userId : userId
 		},
@@ -166,7 +168,7 @@ $(document).ready(function() {
 function getSchemaInfo(node, type) {
 	if (node.children == null) {
 		$.ajax({
-			url: 'http://10.47.39.102:8080/dbmsTool/schemaInfo',
+			url: url + '/dbmsTool/schemaInfo',
 			data: {
 				schema: node.text,
 				userId : userId
@@ -205,7 +207,7 @@ function getObjectInfo(node, type) {
 	var root = $('#dbmsTree').tree('getRoot', node.target);
 	if (node.children == null) {
 		$.ajax({
-			url: 'http://10.47.39.102:8080/dbmsTool/objectInfo',
+			url: url + '/dbmsTool/objectInfo',
 			data: {
 				id: root.text,
 				object: node.id,
@@ -255,7 +257,7 @@ function getTableChildren(node, type) {
 	if (node.id == 'TABLE' && node.children == null) {
 		var root = $('#dbmsTree').tree('getRoot', node.target);
 		$.ajax({
-			url: 'http://10.47.39.102:8080/dbmsTool/getTableChildren',
+			url: url + '/dbmsTool/getTableChildren',
 			data: {
 				schema: root.text,
 				objectType: node.id,
@@ -296,7 +298,7 @@ function runCurrentSQL(cursor) {
 	$('#dbmsOutput').datagrid('loadData', []);
 	var text = $('#script').val();
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/runCurrentSQL',
+		url: url + '/dbmsTool/runCurrentSQL',
 		data: {
 			sql: text,
 			cursor: cursor,
@@ -317,7 +319,7 @@ function runAllSQL() {
 	$('#dbmsOutput').datagrid('loadData', []);
 	var text = $('#script').val();
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/runAllSQL',
+		url: url + '/dbmsTool/runAllSQL',
 		data: {
 			sqls: text,
 			userId: userId
@@ -415,7 +417,7 @@ function sessionOut() {
 // ActionData 테이블에 존재하는 연도 가져오기
 function setChartYears() {
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/getChartYears',
+		url: url + '/dbmsTool/getChartYears',
 		success: function(data) {
 			var values = $('#mChartCombobox').combobox('getData');
 			for (var i = 0; i < data.length; i++) {
@@ -434,7 +436,7 @@ function setChartYears() {
 // ActionData 테이블에 존재하는 연도별 월 가져오기
 function setChartMonth(year) {
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/getChartMonth',
+		url: url + '/dbmsTool/getChartMonth',
 		data: {
 			year: year
 		},
@@ -481,7 +483,7 @@ function selectDChartMonth(month) {
 // mChart 정보 불러오기
 function setMChart(year) {
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/setMChart',
+		url: url + '/dbmsTool/setMChart',
 		data: {
 			year: year
 		},
@@ -524,7 +526,7 @@ function setMChart(year) {
 // dChart 정보 불러오기
 function setDChart(year, month) {
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/setDChart',
+		url: url + '/dbmsTool/setDChart',
 		data: {
 			year: year,
 			month: month

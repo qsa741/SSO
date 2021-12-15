@@ -8,8 +8,9 @@
 <script type="text/javascript" src="/resources/easyui/plugins/jquery.panel.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var url = 'http://10.47.39.102:8080';
 	$.ajax({
-		url : 'http://10.47.39.102:8080/dbmsTool/loadObject',
+		url : url + '/dbmsTool/loadObject',
 		data : {
 			schema : '${dto.schema}',
 			objectType : '${dto.objectType}',
