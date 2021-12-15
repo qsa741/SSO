@@ -81,6 +81,18 @@
 					$('#tableDetailsConstraints').datagrid({data});
 				}
 			});
+			$.ajax({
+				url : 'http://10.47.39.102:8080/dbmsTool/tableDetailsScript',
+				data : {
+					table : node.text,
+					schema : schema.text,
+					userId : userId
+				},
+				dataType : 'text',
+				success : function(text) {
+					$('#tableDetailsScript').text(text);
+				}
+			});
 		}
 	});
 </script>
@@ -157,5 +169,8 @@
 				</tr>
 			</thead>
 		</table>
+	</div>
+	<div class="tab" title="Script" style="display: none;">
+ 		<textarea id="tableDetailsScript" readOnly wrap="off"></textarea> 
 	</div>
 </div>
