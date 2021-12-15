@@ -20,26 +20,26 @@ public class KafkaServiceImpl implements KafkaService {
 	// kafka로 온 user 데이터 저장
 	@Override
 	public void saveUser(JSONObject data) throws Exception {
-		JSONObject json = new JSONObject(data.get("data").toString());
-
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		JSONObject json = new JSONObject(data.getString("data").toString());
 		Users user = new Users();
-		user.setId((String) json.get("id"));
-		user.setPw((String) json.get("pw"));
-		user.setEmail((String) json.get("email"));
-		user.setPhone((String) json.get("phone"));
-		user.setDbId((String) json.get("dbId"));
-		user.setDbPw((String) json.get("dbPw"));
+		
+		user.setId(json.getString("id"));
+		user.setPw(json.getString("pw"));
+		user.setEmail(json.getString("email"));
+		user.setPhone(json.getString("phone"));
+		user.setDbId(json.getString("dbId"));
+		user.setDbPw(json.getString("dbPw"));
 
-		if (json.get("signUpDate").equals("null")) {
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (json.getString("signUpDate").equals("null")) {
 			String time = fmt.format(new Date());
 			user.setSignUpDate(fmt.parse(time));
 		} else {
-			user.setSignUpDate((Date) json.get("signUpDate"));
+			user.setSignUpDate(fmt.parse(json.getString("signUpDate")));
 		}
 
 		user.setUnSignDate(null);
-		user.setState((String) json.get("state"));
+		user.setState(json.getString("state"));
 
 		userRepository.save(user);
 	}

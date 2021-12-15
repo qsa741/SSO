@@ -28,7 +28,7 @@ public class SsoController {
 	@RequestMapping("/signIn")
 	public String signIn(HttpServletRequest request) throws Exception {
 		String view = "";
-
+		
 		// 자동로그인시 메인으로 이동
 		if (ssoService.autoSignInCheck(request)) {
 			view = "redirect:/dbms/dbms";

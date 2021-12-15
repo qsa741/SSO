@@ -37,6 +37,7 @@ public class SsoSQL {
 
 		try {
 			Class.forName(driver);
+//			conn = DriverManager.getConnection(url, username, "aa");
 			conn = DriverManager.getConnection(url, username, password);
 			pre = conn.prepareStatement(sql);
 			pre.setString(1, action);

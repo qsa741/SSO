@@ -72,12 +72,12 @@
 							<div class="tab" title="Script" style="display: none;">
 								<div id="scriptToolbar">
 									<button id="runAllSQL" class="easyui-linkbutton"
-										title="전체 실행 (F5)">Run All SQL</button>
+										title="전체 실행 (F5)" disabled>Run All SQL</button>
 									<button id="runCurrentSQL" class="easyui-linkbutton"
-										title="한줄 실행 (Ctrl + Enter)">Run Current SQL</button>
+										title="한줄 실행 (Ctrl + Enter)" disabled>Run Current SQL</button>
 								</div>
 								<div id="scriptBody">
-									<textarea id="script" spellcheck="false"></textarea>
+									<textarea id="script" spellcheck="false" readOnly placeholder="DB 로그인 후 사용 가능합니다."></textarea>
 								</div>
 							</div>
 						</div>

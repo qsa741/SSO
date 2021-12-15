@@ -42,12 +42,6 @@ public class SsoServiceImpl implements SsoService {
 	@Value("${sso.properties.session-db-pw}")
 	private String sessionDBPW;
 
-	// 세션 ID 가져오기
-	public String sessionID() {
-		return (String) RequestContextHolder.getRequestAttributes().getAttribute(sessionID,
-				RequestAttributes.SCOPE_SESSION);
-	}
-
 	// ID, Email, Phone 중복시 1 반환
 	@Override
 	public long signUpCheck(Users user) {
@@ -87,7 +81,9 @@ public class SsoServiceImpl implements SsoService {
 		String action = "C";
 		if (user.getId() == null) {
 			String id = sessionID();
+			Users newUser = userRepository.findById(id).get();
 			user.setId(id);
+			user.setSignUpDate(newUser.getSignUpDate());
 			action = "U";
 		}
 		user.setState("Y");
@@ -111,25 +107,19 @@ public class SsoServiceImpl implements SsoService {
 				for (Cookie c : cookies) {
 					if (c.getName().equals("auto")) {
 						SessionConfig.getSessionIdCheck(sessionID, c.getValue());
-						RequestContextHolder.getRequestAttributes().setAttribute(sessionID, c.getValue(),
-								RequestAttributes.SCOPE_SESSION);
 						Users newUser = userRepository.findById(c.getValue()).get();
-						RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
-								RequestAttributes.SCOPE_SESSION);
-						RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW,
-								aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
+						setSession(c.getValue(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 						ssoSQL.saveUserAction("R", c.getValue());
+						
 						return true;
 					}
 				}
 			}
 		} else {
 			Users newUser = userRepository.findById(sid).get();
-			RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
-					RequestAttributes.SCOPE_SESSION);
-			RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW, aes.decrypt(newUser.getDbPw()),
-					RequestAttributes.SCOPE_SESSION);
+			setSession(sid, newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 			ssoSQL.saveUserAction("R", sid);
+			
 			return true;
 		}
 		return false;
@@ -152,13 +142,8 @@ public class SsoServiceImpl implements SsoService {
 
 				if (pw.equals(user.getPw())) {
 					SessionConfig.getSessionIdCheck(sessionID, user.getId());
-					RequestContextHolder.getRequestAttributes().setAttribute(sessionID, user.getId(),
-							RequestAttributes.SCOPE_SESSION);
-					RequestContextHolder.getRequestAttributes().setAttribute(sessionDBID, newUser.getDbId(),
-							RequestAttributes.SCOPE_SESSION);
-					RequestContextHolder.getRequestAttributes().setAttribute(sessionDBPW,
-							aes.decrypt(newUser.getDbPw()), RequestAttributes.SCOPE_SESSION);
-
+					setSession(user.getId(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
+					
 					ssoSQL.saveUserAction("R", user.getId());
 					if (auto != null) {
 						Cookie cookie = new Cookie("auto", user.getId());
@@ -219,6 +204,23 @@ public class SsoServiceImpl implements SsoService {
 		HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest()
 				.getSession(true);
 		session.invalidate();
+	}
+
+	// 세션 ID 가져오기
+	public String sessionID() {
+		return (String) RequestContextHolder.getRequestAttributes().getAttribute(sessionID,
+				RequestAttributes.SCOPE_SESSION);
+	}
+
+	// 세션 세팅
+	public void setSession(String sessionID, String sessionDBID, String sessionDBPW) {
+		System.out.println("실행");
+		RequestContextHolder.getRequestAttributes().setAttribute(this.sessionID, sessionID,
+				RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().setAttribute(this.sessionDBID, sessionDBID,
+				RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().setAttribute(this.sessionDBPW, sessionDBPW,
+				RequestAttributes.SCOPE_SESSION);
 	}
 
 }

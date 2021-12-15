@@ -5,7 +5,6 @@ import java.io.StringWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jyPage.exception.JYException;
 
 @ControllerAdvice
-@Controller
 public class JYExceptionController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,7 +31,7 @@ public class JYExceptionController {
 		ModelAndView mView = new ModelAndView();
 		
 		mView.addObject("exception", e);
-		mView.setViewName("error/error");
+		mView.setViewName("/error/error");
 		
 		logger.error(getPrintStackTrace(e));
 		
