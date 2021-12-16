@@ -214,7 +214,6 @@ public class SsoServiceImpl implements SsoService {
 
 	// 세션 세팅
 	public void setSession(String sessionID, String sessionDBID, String sessionDBPW) {
-		System.out.println("실행");
 		RequestContextHolder.getRequestAttributes().setAttribute(this.sessionID, sessionID,
 				RequestAttributes.SCOPE_SESSION);
 		RequestContextHolder.getRequestAttributes().setAttribute(this.sessionDBID, sessionDBID,

@@ -6,16 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.jyPage.sso.entity.Users;
 import com.jyPage.sso.repository.UsersRepository;
+import com.jyPage.sso.sql.ScheduleSQL;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private ScheduleSQL scheduleSQL;
 
@@ -38,25 +43,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 			JSONObject json = new JSONObject((String) map.get("DATA"));
 			user = new Users();
 
-			user.setId((String) json.get("id"));
-			user.setPw((String) json.get("pw"));
-			user.setEmail((String) json.get("email"));
-			user.setPhone((String) json.get("phone"));
-			user.setDbId((String) json.get("dbId"));
-			user.setDbPw((String) json.get("dbPw"));
-			if (json.get("signUpDate").equals("null")) {
+			user.setId(json.getString("id"));
+			user.setPw(json.getString("pw"));
+			user.setEmail(json.getString("email"));
+			user.setPhone(json.getString("phone"));
+			user.setDbId(json.getString("dbId"));
+			user.setDbPw(json.getString("dbPw"));
+			if (json.getString("signUpDate").equals("null")) {
 				time = fmt.format(new Date());
 				user.setSignUpDate(fmt.parse(time));
 			} else {
-				user.setSignUpDate((Date) json.get("signUpDate"));
+				user.setSignUpDate(fmt.parse(json.getString("signUpDate")));
 			}
-			user.setState((String) json.get("state"));
+			user.setState(json.getString("state"));
 
 			userRepository.save(user);
+			
+			logger.info(new Date().toString() + " -- User Scheduler execute : " + json.getString("id"));
 		}
 
-		// System.out.println(new Date().toString() + " -- User Scheduler " +
-		// list.size() + " rows execute");
 	}
 
 	// 하루 간격으로 탈퇴한지 24개월 지난 계정 삭제

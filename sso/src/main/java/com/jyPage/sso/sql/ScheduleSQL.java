@@ -1,4 +1,4 @@
-package com.jyPage.sso.scheduler;
+package com.jyPage.sso.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

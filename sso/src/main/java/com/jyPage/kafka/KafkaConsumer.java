@@ -25,7 +25,7 @@ public class KafkaConsumer {
 	private KafkaServiceImpl kafkaService;
 
 	// 유저 정보 토픽 (생성 / 수정)
-	@KafkaListener(topics = "userTopic", groupId = "sso")
+	@KafkaListener(topics = "userTopic", groupId = "sso-userTopic")
 	public void saveUser(String data) throws Exception {
 		JSONObject json = new JSONObject(data);
 
@@ -36,7 +36,7 @@ public class KafkaConsumer {
 	}
 
 	// 유저 활동 토픽 (C R U D)
-	@KafkaListener(topics = "actionTopic", groupId = "sso")
+	@KafkaListener(topics = "actionTopic", groupId = "sso-actionTopic")
 	public void settingUserAction(String data) throws Exception {
 		JSONObject json = new JSONObject(data);
 
