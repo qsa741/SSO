@@ -13,7 +13,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/schemaDetailsInfo',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text,
+					schemaName : $('#dbmsTree').tree('getSelected').text,
 					userId : userId
 				},
 				dataType: 'json',
@@ -24,7 +24,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/schemaDetailsRoleGrants',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text,
+					schemaName : $('#dbmsTree').tree('getSelected').text,
 					userId : userId
 				},
 				dataType: 'json',
@@ -35,7 +35,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/schemaDetailsSystemPrivileges',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text, 
+					schemaName : $('#dbmsTree').tree('getSelected').text, 
 					userId : userId
 				},
 				dataType: 'json',
@@ -46,7 +46,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/schemaDetailsExtents',
 				data : {
-					schema : $('#dbmsTree').tree('getSelected').text, 
+					schemaName : $('#dbmsTree').tree('getSelected').text, 
 					userId : userId
 				},
 				dataType: 'json',

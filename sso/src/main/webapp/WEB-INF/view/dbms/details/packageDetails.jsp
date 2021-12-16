@@ -17,8 +17,9 @@
 			$.ajax({
 				url : url + '/dbmsTool/packageDetailsCode',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					packageName : node.text,
+					objectType : 'PACKAGE',
 					userId : userId
 				},
 				dataType: 'json',

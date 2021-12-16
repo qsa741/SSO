@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jyPage.dbms.dto.LoadObjectDTO;
+import com.jyPage.dbms.dto.DbObjectDTO;
 
 @RequestMapping("/dbms")
 @Controller
@@ -82,7 +82,7 @@ public class DbmsController {
 
 	// 추가 table tab 페이지
 	@RequestMapping("/loadTable")
-	public String loadTable(LoadObjectDTO dto, String userId, Model model) {
+	public String loadTable(DbObjectDTO dto, String userId, Model model) {
 		model.addAttribute("dto", dto);
 		model.addAttribute("userId", userId);
 		model.addAttribute("url", url);

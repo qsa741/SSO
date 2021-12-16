@@ -17,8 +17,9 @@
 			$.ajax({
 				url : url + '/dbmsTool/procedureDetailsCode',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					procedureName : node.text,
+					objectType : 'PROCEDURE',
 					userId : userId
 				},
 				dataType: 'json',

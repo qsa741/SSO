@@ -170,7 +170,7 @@ function getSchemaInfo(node, type) {
 		$.ajax({
 			url: url + '/dbmsTool/schemaInfo',
 			data: {
-				schema: node.text,
+				schemaName: node.text,
 				userId : userId
 			},
 			dataType: 'json',
@@ -209,8 +209,8 @@ function getObjectInfo(node, type) {
 		$.ajax({
 			url: url + '/dbmsTool/objectInfo',
 			data: {
-				id: root.text,
-				object: node.id,
+				schemaName: root.text,
+				objectType: node.id,
 				userId: userId
 			},
 			dataType: 'json',
@@ -246,7 +246,7 @@ function getObjectInfo(node, type) {
 function loadObjectTable(node, type) {
 	if(type == 'db') {
 		var root = $('#dbmsTree').tree('getRoot', node.target);
-		addTab(node.text, '/dbms/loadTable?schema=' + root.text + '&objectType=' + node.id + '&objectName=' + node.text + '&userId=' + userId);
+		addTab(node.text, '/dbms/loadTable?schemaName=' + root.text + '&objectType=' + node.id + '&tableName=' + node.text + '&userId=' + userId);
 	}
 	getTableChildren(node, type);
 }
@@ -259,9 +259,9 @@ function getTableChildren(node, type) {
 		$.ajax({
 			url: url + '/dbmsTool/getTableChildren',
 			data: {
-				schema: root.text,
+				schemaName: root.text,
+				tableName: node.text,
 				objectType: node.id,
-				objectName: node.text,
 				userId: userId
 			},
 			dataType: 'json',

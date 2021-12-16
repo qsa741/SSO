@@ -16,7 +16,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/viewDetailsColumns',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					viewName : node.text,
 					userId : userId
 				},
@@ -28,7 +28,7 @@
 			$.ajax({
 				url : url + '/dbmsTool/viewDetailsScript',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					viewName : node.text,
 					userId : userId
 				},

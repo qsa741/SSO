@@ -17,8 +17,9 @@
 			$.ajax({
 				url : url + '/dbmsTool/typeDetailsCode',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					typeName : node.text, 
+					objectType : 'TYPE',
 					userId : userId
 				},
 				dataType: 'json',

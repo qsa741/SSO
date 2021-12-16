@@ -73,6 +73,7 @@ EasyUI
 	display: flex;
     align-items: center;
 }
+
 #user img {
 	height: 90%;
 	width:auto;
@@ -291,6 +292,10 @@ table * {
 }
 
 /* EasyUI */
+/* button */
+.l-btn-plain:hover {
+	border:none;
+}
 /* panel */
 .panel {
 	background-color: gainsboro;

@@ -21,8 +21,8 @@
 			$.ajax({
 				url : url + '/dbmsTool/tableDetailsTable',
 				data : {
-					table : node.text,
-					schema : schema.text,
+					schemaName : schema.text,
+					tableName : node.text,
 					userId : userId
 				},
 				dataType: 'json',
@@ -33,8 +33,8 @@
 			$.ajax({
 				url : url + '/dbmsTool/tableDetailsColumns',
 				data : {
-					table : node.text,
-					schema : schema.text,
+					schemaName : schema.text,
+					tableName : node.text,
 					userId : userId
 				},
 				dataType: 'json',
@@ -45,8 +45,8 @@
 			$.ajax({
 				url : url + '/dbmsTool/tableDetailsIndexesTop',
 				data : {
-					table : node.text,
-					schema : schema.text,
+					schemaName : schema.text,
+					tableName : node.text,
 					userId : userId
 				},
 				dataType: 'json',
@@ -73,8 +73,8 @@
 			$.ajax({
 				url : url + '/dbmsTool/tableDetailsConstraints',
 				data : {
-					table : node.text,
-					schema : schema.text,
+					schemaName : schema.text,
+					tableName : node.text,
 					userId: userId
 				},
 				dataType: 'json',
@@ -85,8 +85,8 @@
 			$.ajax({
 				url : url + '/dbmsTool/tableDetailsScript',
 				data : {
-					table : node.text,
-					schema : schema.text,
+					schemaName : schema.text,
+					tableName : node.text,
 					userId : userId
 				},
 				dataType : 'text',

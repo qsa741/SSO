@@ -16,8 +16,9 @@
 			$.ajax({
 				url : url + '/dbmsTool/triggerDetailsSource',
 				data : {
-					schema : schema.text,
+					schemaName : schema.text,
 					triggerName : node.text,
+					objectType : 'TRIGGER',
 					userId : userId
 				},
 				dataType: 'json',

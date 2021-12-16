@@ -12,9 +12,9 @@ $(document).ready(function() {
 	$.ajax({
 		url : url + '/dbmsTool/loadObject',
 		data : {
-			schema : '${dto.schema}',
+			schemaName : '${dto.schemaName}',
+			tableName : '${dto.tableName}',
 			objectType : '${dto.objectType}',
-			objectName : '${dto.objectName}',
 			userId : '${userId}'
 		},
 		dataType : 'json',
