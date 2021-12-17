@@ -5,9 +5,6 @@
 <head>
 	<meta charset="EUC-KR">
 	<title>로그인</title>
-	<script src="/resources/easyui/jquery.min.js"></script>
-	<script src="/resources/easyui/jquery.easyui.min.js"></script>
-	<script src="/resources/user/js/signIn.js" charset="UTF-8"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/default/easyui.css">
@@ -58,6 +55,8 @@
 			</form>
 		</div>
 	</div>
-
+	<script src="/resources/easyui/jquery.min.js"></script>
+	<script src="/resources/easyui/jquery.easyui.min.js"></script>
+	<script src="/resources/user/js/signIn.js"></script>
 </body>
 </html>

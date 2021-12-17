@@ -6,9 +6,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원정보 수정</title>
-	<script src="/resources/easyui/jquery.min.js"></script>
-	<script src="/resources/easyui/jquery.easyui.min.js"></script>
-	<script src="/resources/user/js/modifyUser.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/easyui/themes/default/easyui.css">
@@ -90,5 +87,8 @@
 			</div>
 		</form>
 	</div>
+	<script src="/resources/easyui/jquery.min.js"></script>
+	<script src="/resources/easyui/jquery.easyui.min.js"></script>
+	<script src="/resources/user/js/modifyUser.js"></script>
 </body>
 </html>

@@ -4,25 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>메인</title>
-<script type="text/javascript" src="/resources/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.draggable.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.droppable.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.datagrid.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.dialog.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.panel.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.resizable.js"></script>
-<script type="text/javascript" src="/resources/easyui/plugins/jquery.linkbutton.js"></script>
-<script type="text/javascript" src="/resources/dbms/js/chart.js"></script>
-<script type="text/javascript" src="/resources/dbms/js/dbms.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/dbms/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/resources/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="/resources/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="/resources/dbms/css/chart.css">
-<link rel="stylesheet" type="text/css" href="/resources/dbms/css/dbms.css">
-<link rel="stylesheet" type="text/css" href="/resources/dbms/css/detail.css">
+	<meta charset="UTF-8">
+	<title>메인</title>
+	<link rel="stylesheet" type="text/css" href="/resources/dbms/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/resources/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/resources/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/resources/dbms/css/chart.css">
+	<link rel="stylesheet" type="text/css" href="/resources/dbms/css/dbms.css">
+	<link rel="stylesheet" type="text/css" href="/resources/dbms/css/detail.css">
 </head>
 <body id="mainBody">
 	<div id="container">
@@ -163,5 +152,16 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="/resources/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/resources/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.draggable.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.droppable.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.datagrid.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.dialog.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.panel.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.resizable.js"></script>
+	<script type="text/javascript" src="/resources/easyui/plugins/jquery.linkbutton.js"></script>
+	<script type="text/javascript" src="/resources/dbms/js/chart.js"></script>
+	<script type="text/javascript" src="/resources/dbms/js/dbms.js"></script>
 </body>
 </html>
