@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <script>
 	$('#schemaDetails').tabs({
 	    border:false
@@ -58,52 +59,56 @@
 	});
 </script>
 <div id="schemaDetails" class="easyui-tabs">
-	<div class="tab" title="Info" style="display:none;">
-    	<table id="schemaDetailsInfo" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'PARAMETER'">Parameter</th>
-    				<th data-options="field:'VALUE'">Value</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
-    <div class="tab" title="Role Grants" style="display:none;">
-        <table id="schemaDetailsRoleGrants" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'GRANTED_ROLE'">Role</th>
-    				<th data-options="field:'ADMIN_OPTION'">Admin</th>
-    				<th data-options="field:'DEFAULT_ROLE'">Default Role</th>
-    				<th data-options="field:'GRANTEE'">Grantee</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
-    <div class="tab" title="System Privileges" style="display:none;">
-         <table id="schemaDetailsSystemPrivileges" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'PRIVILEGE'">Privileage</th>
-    				<th data-options="field:'ADMIN_OPTION'">Admin</th>
-    				<th data-options="field:'GRANTEE'">Grantee</th>
-    				<th data-options="field:'TYPE'">Type</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
-    <div class="tab" title="Extents" style="display:none;">
-         <table id="schemaDetailsExtents" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'TABLESPACE'">Tablespace</th>
-    				<th data-options="field:'SEGMENT_NAME'">Segment Name</th>
-    				<th data-options="field:'OBJECT_NAME'">Object Name</th>
-    				<th data-options="field:'FILE_ID'">File ID</th>
-    				<th data-options="field:'BLOCK_ID'">Block ID</th>
-    				<th data-options="field:'BLOCKS'">#Blocks</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
+	<div class="tab" title="Info" style="display: none;">
+		<table id="schemaDetailsInfo" class="easyui-datagrid"
+			data-options="singleSelect:'true'">
+			<thead>
+				<tr>
+					<th data-options="field:'PARAMETER'">Parameter</th>
+					<th data-options="field:'VALUE'">Value</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tab" title="Role Grants" style="display: none;">
+		<table id="schemaDetailsRoleGrants" class="easyui-datagrid"
+			data-options="singleSelect:'true'">
+			<thead>
+				<tr>
+					<th data-options="field:'GRANTED_ROLE'">Role</th>
+					<th data-options="field:'ADMIN_OPTION'">Admin</th>
+					<th data-options="field:'DEFAULT_ROLE'">Default Role</th>
+					<th data-options="field:'GRANTEE'">Grantee</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tab" title="System Privileges" style="display: none;">
+		<table id="schemaDetailsSystemPrivileges" class="easyui-datagrid"
+			data-options="singleSelect:'true'">
+			<thead>
+				<tr>
+					<th data-options="field:'PRIVILEGE'">Privileage</th>
+					<th data-options="field:'ADMIN_OPTION'">Admin</th>
+					<th data-options="field:'GRANTEE'">Grantee</th>
+					<th data-options="field:'TYPE'">Type</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tab" title="Extents" style="display: none;">
+		<table id="schemaDetailsExtents" class="easyui-datagrid"
+			data-options="singleSelect:'true'">
+			<thead>
+				<tr>
+					<th data-options="field:'TABLESPACE'">Tablespace</th>
+					<th data-options="field:'SEGMENT_NAME'">Segment Name</th>
+					<th data-options="field:'OBJECT_NAME'">Object Name</th>
+					<th data-options="field:'FILE_ID'">File ID</th>
+					<th data-options="field:'BLOCK_ID'">Block ID</th>
+					<th data-options="field:'BLOCKS'">#Blocks</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </div>

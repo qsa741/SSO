@@ -58,7 +58,7 @@ $(document).ready(function() {
 		if (idValidate(id) == 1) {
 			alert('아이디를 다시 확인해주세요.');
 			return false;
-        } else if (pwValidate() == 1) {
+		} else if (pwValidate() == 1) {
 			alert('비밀번호를 다시 확인해주세요.');
 			return false;
 		} else if (pwCheckValidate(pwCheck) == 1) {
@@ -131,7 +131,7 @@ function pwValidate() {
 	} else if (pw.length > 20) {
 		$('#pwMsg').text('20글자 이하로 입력해주세요.');
 		return 1;
-	} else if (!pwRegExp.test(pw)){
+	} else if (!pwRegExp.test(pw)) {
 		$('#pwMsg').text('영문, 숫자, 특수문자가 필수입니다.');
 		return 1;
 	} else if (pw == '') {
@@ -145,7 +145,7 @@ function pwValidate() {
 
 // pwCheck 유효성 검사
 function pwCheckValidate(value) {
-	if(pwValidate() == 1) {
+	if (pwValidate() == 1) {
 		return 1;
 	}
 	var pw = $('#pw').val();

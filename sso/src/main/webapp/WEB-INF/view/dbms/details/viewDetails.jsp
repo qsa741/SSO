@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <script>
 	$('#viewDetails').tabs({
 	    border:false
@@ -45,23 +46,24 @@
 	});
 </script>
 <div id="viewDetails" class="easyui-tabs">
-	<div class="tab" title="Columns" style="display:none;">
-    	<table id="viewDetailsColumns" class="easyui-datagrid" data-options="singleSelect:'true'">
-    		<thead>
-    			<tr>
-    				<th data-options="field:'COLUMN_NAME'">Column Name</th>
-    				<th data-options="field:'COLUMN_ID'">Col ID</th>
-    				<th data-options="field:'DATA_TYPE'">Data Type</th>
-    				<th data-options="field:'NULLABLE'">Null</th>
-    				<th data-options="field:'UPDATABLE'">Updatable</th>
-    				<th data-options="field:'INSERTABLE'">Insertable</th>
-    				<th data-options="field:'DELETABLE'">Deletable</th>
-    				<th data-options="field:'COMMENTS'">Comments</th>
-    			</tr>
-    		</thead>
-    	</table>
-    </div>
-	<div class="tab" title="Script" style="display:none;">
+	<div class="tab" title="Columns" style="display: none;">
+		<table id="viewDetailsColumns" class="easyui-datagrid"
+			data-options="singleSelect:'true'">
+			<thead>
+				<tr>
+					<th data-options="field:'COLUMN_NAME'">Column Name</th>
+					<th data-options="field:'COLUMN_ID'">Col ID</th>
+					<th data-options="field:'DATA_TYPE'">Data Type</th>
+					<th data-options="field:'NULLABLE'">Null</th>
+					<th data-options="field:'UPDATABLE'">Updatable</th>
+					<th data-options="field:'INSERTABLE'">Insertable</th>
+					<th data-options="field:'DELETABLE'">Deletable</th>
+					<th data-options="field:'COMMENTS'">Comments</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tab" title="Script" style="display: none;">
 		<textarea id="viewDetailsScript" readOnly wrap="off"></textarea>
-    </div>
+	</div>
 </div>

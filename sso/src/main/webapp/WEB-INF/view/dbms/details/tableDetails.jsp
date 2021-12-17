@@ -126,8 +126,8 @@
 		</table>
 	</div>
 	<div class="tab" title="Indexes" style="display: none;">
-		<div class="easyui-layout" style="width:100%;height:100%;">
-			<div data-options="region:'center',split:ture" style="height:50%;">
+		<div class="easyui-layout" style="width: 100%; height: 100%;">
+			<div data-options="region:'center',split:ture" style="height: 50%;">
 				<table id="tableDetailsIndexesTop" class="easyui-datagrid"
 					data-options="singleSelect:'true'">
 					<thead>
@@ -141,7 +141,7 @@
 					</thead>
 				</table>
 			</div>
-			<div data-options="region:'south',split:true" style="height:50%;">
+			<div data-options="region:'south',split:true" style="height: 50%;">
 				<table id="tableDetailsIndexesBottom" class="easyui-datagrid"
 					data-options="singleSelect:'true'">
 					<thead>
@@ -172,6 +172,6 @@
 		</table>
 	</div>
 	<div class="tab" title="Script" style="display: none;">
- 		<textarea id="tableDetailsScript" readOnly wrap="off"></textarea> 
+		<textarea id="tableDetailsScript" readOnly wrap="off"></textarea>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 body {
-	width:100vw;
-	height:100vh;
+	width: 100vw;
+	height: 100vh;
 }
 
 .msg {
@@ -12,25 +12,25 @@ body {
 }
 
 .msg h2 {
-	font-size:50px;
-	margin-bottom:40px;
+	font-size: 50px;
+	margin-bottom: 40px;
 }
 
 p {
-	margin-bottom:30px;
-	font-size:30px;
+	margin-bottom: 30px;
+	font-size: 30px;
 }
 
 button {
 	background-color: #709078;
-    height: 40px;
-    font-size: 15px;
-    width: 165px;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
+	height: 40px;
+	font-size: 15px;
+	width: 165px;
+	border: none;
+	border-radius: 10px;
+	color: #fff;
 }
 
 button:hover {
-	background-color:#80a088;
+	background-color: #80a088;
 }

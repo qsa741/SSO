@@ -13,29 +13,29 @@ import com.jyPage.exception.JYException;
 
 @ControllerAdvice
 public class JYExceptionController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	// PrintStackTrace String으로 반환
 	public String getPrintStackTrace(Throwable e) {
-		
+
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
-		
+
 		return errors.toString();
 	}
 
-	// JYException 발생시 
+	// JYException 발생시
 	@ExceptionHandler(JYException.class)
 	public ModelAndView handleError(JYException e) {
 		ModelAndView mView = new ModelAndView();
-		
+
 		mView.addObject("exception", e);
 		mView.setViewName("/error/error");
-		
+
 		logger.error(getPrintStackTrace(e));
-		
+
 		return mView;
 	}
-	
+
 }

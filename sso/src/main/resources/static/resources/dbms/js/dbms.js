@@ -3,18 +3,18 @@ var url;
 $(document).ready(function() {
 	userId = $('#userLabel label').text();
 	url = 'http://10.47.39.102:8080';
-	
+
 	// dbmsTree 초기 데이터 세팅
 	$.ajax({
-		url : url + '/dbmsTool/allSchemas',
-		data : {
-			userId : userId
+		url: url + '/dbmsTool/allSchemas',
+		data: {
+			userId: userId
 		},
-		dataType : 'json'
-	}).done(function (data){
-		$('#dbmsTree').tree('loadData',data);
+		dataType: 'json'
+	}).done(function(data) {
+		$('#dbmsTree').tree('loadData', data);
 	})
-	
+
 	// 이전 클릭 위치 저장
 	var saveClick;
 	// 기본 세팅 및 클릭 이벤트
@@ -54,12 +54,12 @@ $(document).ready(function() {
 				$('#include').load('/dbms/triggerDetails');
 			}
 			saveClick = node.text;
-			
+
 		},
 		// 더블클릭시 ID에 맞는 하위 목록 불러오기
 		onDblClick: function(node) {
 			if (node.id == 'SCHEMA') {
-				getSchemaInfo(node,'dblClick');
+				getSchemaInfo(node, 'dblClick');
 			} else if (node.id == 'TABLE') {
 				loadObjectTable(node, 'dblClick');
 			} else {
@@ -76,9 +76,9 @@ $(document).ready(function() {
 				getObjectInfo(node, 'expand');
 			}
 		}
-		
+
 	});
-	
+
 	// 중앙 탭 높이 설정
 	$('#centerTabs').tabs({
 		height: '100%'
@@ -116,7 +116,7 @@ $(document).ready(function() {
 			e.preventDefault();
 		}
 	});
-	
+
 	// 마우스 클릭시 커서 위치 저장
 	var cursor = 0;
 	$('#script').click(function() {
@@ -156,7 +156,7 @@ $(document).ready(function() {
 
 	// 그래프 Drawer css 
 	$('#drawerBtn').click(function() {
-		$('.drawer').addClass('chartDrawer');	
+		$('.drawer').addClass('chartDrawer');
 		$('#drawer').drawer('expand');
 	});
 	$('.drawer-mask').click(function() {
@@ -171,32 +171,32 @@ function getSchemaInfo(node, type) {
 			url: url + '/dbmsTool/schemaInfo',
 			data: {
 				schemaName: node.text,
-				userId : userId
+				userId: userId
 			},
 			dataType: 'json',
 			success: function(data) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'expand'){
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data,
 					});
-					if(type == 'expand') {
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'dblClick') {
+			if (type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'dblClick') {
+		if (type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -218,25 +218,25 @@ function getObjectInfo(node, type) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'expand'){
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data
 					});
-					if(type == 'expand'){
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'dblClick') {
+			if (type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'dblClick') {
+		if (type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -244,18 +244,18 @@ function getObjectInfo(node, type) {
 
 // 테이블 정보 불러오기
 function loadObjectTable(node, type) {
-	if(type == 'dblClick') {
+	if (type == 'dblClick') {
 		var root = $('#dbmsTree').tree('getRoot', node.target);
 		$.ajax({
 			url: url + '/dbmsTool/loadObject',
-			data : {
-				schemaName : root.text,
-				objectType : node.id,
-				tableName : node.text,
-				userId : userId
+			data: {
+				schemaName: root.text,
+				objectType: node.id,
+				tableName: node.text,
+				userId: userId
 			},
 			dataType: 'json',
-			success : function(data) {
+			success: function(data) {
 				addTab(data);
 			}
 		});
@@ -281,25 +281,25 @@ function getTableChildren(node, type) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'expand'){
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data.children
 					});
-					if(type == 'expand'){
+					if (type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'dblClick') {
+			if (type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'dblClick') {
+		if (type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -371,12 +371,12 @@ function addTab(data) {
 				align: 'center'
 			};
 			cols.push(menuItem);
-		} 
+		}
 		$('#' + data.key).datagrid({
-			columns : [cols],
-			data : data.data
+			columns: [cols],
+			data: data.data
 		});
-	}	
+	}
 }
 
 
@@ -390,7 +390,7 @@ function scriptResult(data) {
 	// SQL SELECT문 결과가 존재
 	if (data.size != 0) {
 		consoleAddTab(data);
-	// 나머지 경우
+		// 나머지 경우
 	} else {
 		dbmsOutput(data.data);
 	}
@@ -470,7 +470,7 @@ function setChartMonth(year) {
 		},
 		dataType: 'json',
 		success: function(data) {
-			$('#dChartMonthCombobox').combobox('loadData',[]);
+			$('#dChartMonthCombobox').combobox('loadData', []);
 			var values = $('#dChartMonthCombobox').combobox('getData');
 			for (var i = 0; i < data.length; i++) {
 				values.push({ value: data[i], text: data[i] });

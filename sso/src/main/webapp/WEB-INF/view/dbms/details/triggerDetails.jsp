@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <script>
 	$('#triggerDetails').tabs({
 	    border:false
@@ -34,7 +35,7 @@
 	});
 </script>
 <div id="triggerDetails" class="easyui-tabs">
-	<div class="tab" title="Source" style="display:none;">
-		<textarea id="triggerDetailsSource" readOnly wrap="off"></textarea>    	
-    </div>
+	<div class="tab" title="Source" style="display: none;">
+		<textarea id="triggerDetailsSource" readOnly wrap="off"></textarea>
+	</div>
 </div>

@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @RequestMapping("/dbms")
 @Controller
 public class DbmsController {
 
 	@Value("${dbms.url}")
 	private String url;
-	
+
 	// DBMS 페이지
 	@RequestMapping("/dbms")
 	public String dbms() {

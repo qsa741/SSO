@@ -42,7 +42,7 @@ public class SsoSQL {
 			pre.setString(1, action);
 			pre.setString(2, id);
 			pre.executeUpdate();
-			
+
 			pre.close();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
@@ -67,20 +67,20 @@ public class SsoSQL {
 		Connection conn = null;
 		PreparedStatement pre = null;
 		ResultSet rs = null;
-		
+
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
 			pre = conn.prepareStatement(sql);
 			pre.setString(1, action);
 			rs = pre.executeQuery();
-			
+
 			// 결과가 없을 경우 빈칸 채우기 사용
 			if (!rs.isBeforeFirst()) {
 				pre = conn.prepareStatement(sql2);
 				rs = pre.executeQuery();
 			}
-			
+
 			while (rs.next()) {
 				String[] dateArray = rs.getString(1).split("-");
 				json.put("year", dateArray[0]);
@@ -88,7 +88,7 @@ public class SsoSQL {
 				json.put("day", dateArray[2]);
 				json.put("count", rs.getInt(2));
 			}
-			
+
 			rs.close();
 			pre.close();
 			conn.close();
@@ -114,7 +114,7 @@ public class SsoSQL {
 			pre = conn.prepareStatement(sql);
 			pre.setString(1, data);
 			pre.executeUpdate();
-			
+
 			pre.close();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {

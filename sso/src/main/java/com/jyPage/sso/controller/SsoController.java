@@ -16,19 +16,19 @@ import com.jyPage.sso.service.SsoServiceImpl;
 @RequestMapping("/users")
 @Controller
 public class SsoController {
-	
+
 	@Autowired
 	private SsoServiceImpl ssoService;
-	
+
 	// DBMS URL
 	@Value("${dbms.url}")
 	private String url;
-	
+
 	// 로그인 페이지 연결
 	@RequestMapping("/signIn")
 	public String signIn(HttpServletRequest request) throws Exception {
 		String view = "";
-		
+
 		// 자동로그인시 메인으로 이동
 		if (ssoService.autoSignInCheck(request)) {
 			view = "redirect:/dbms/dbms";
@@ -50,7 +50,7 @@ public class SsoController {
 			view = "/user/signIn";
 		}
 		model.addAttribute("warning", res);
-		
+
 		return view;
 	}
 
@@ -64,7 +64,7 @@ public class SsoController {
 	@RequestMapping("/saveUser")
 	public String test(Users user) throws Exception {
 		ssoService.saveUser(user);
-		
+
 		return "redirect:/users/signIn";
 	}
 
@@ -72,7 +72,7 @@ public class SsoController {
 	@RequestMapping("/modifyUser")
 	public String modifyUser(Model model) throws Exception {
 		model.addAttribute("user", ssoService.getSessionUser());
-		
+
 		return "/user/modifyUser";
 	}
 
@@ -105,5 +105,5 @@ public class SsoController {
 
 		return "redirect:/users/signIn";
 	}
-	
+
 }

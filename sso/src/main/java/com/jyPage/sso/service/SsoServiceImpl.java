@@ -110,7 +110,7 @@ public class SsoServiceImpl implements SsoService {
 						Users newUser = userRepository.findById(c.getValue()).get();
 						setSession(c.getValue(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 						ssoSQL.saveUserAction("R", c.getValue());
-						
+
 						return true;
 					}
 				}
@@ -119,7 +119,7 @@ public class SsoServiceImpl implements SsoService {
 			Users newUser = userRepository.findById(sid).get();
 			setSession(sid, newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 			ssoSQL.saveUserAction("R", sid);
-			
+
 			return true;
 		}
 		return false;
@@ -143,7 +143,7 @@ public class SsoServiceImpl implements SsoService {
 				if (pw.equals(user.getPw())) {
 					SessionConfig.getSessionIdCheck(sessionID, user.getId());
 					setSession(user.getId(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
-					
+
 					ssoSQL.saveUserAction("R", user.getId());
 					if (auto != null) {
 						Cookie cookie = new Cookie("auto", user.getId());

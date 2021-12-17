@@ -18,9 +18,9 @@ import com.jyPage.sso.sql.ScheduleSQL;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private ScheduleSQL scheduleSQL;
 
@@ -58,7 +58,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			user.setState(json.getString("state"));
 
 			userRepository.save(user);
-			
+
 			logger.info(new Date().toString() + " -- User Scheduler execute : " + json.getString("id"));
 		}
 

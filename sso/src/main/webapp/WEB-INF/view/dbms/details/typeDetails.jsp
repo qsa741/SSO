@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <script>
 	$('#typeDetails').tabs({
 	    border:false
@@ -35,7 +36,7 @@
 	});
 </script>
 <div id="typeDetails" class="easyui-tabs">
-	<div class="tab" title="Code" style="display:none;">
-		<textarea id="typeDetailsCode" readOnly wrap="off"></textarea>    	
-    </div>
+	<div class="tab" title="Code" style="display: none;">
+		<textarea id="typeDetailsCode" readOnly wrap="off"></textarea>
+	</div>
 </div>

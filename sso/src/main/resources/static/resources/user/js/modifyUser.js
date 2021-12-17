@@ -12,60 +12,60 @@ $(document).ready(function() {
 			pwCheckValidate(value);
 		}
 	});
-	
+
 	// Email 중복여부 확인
 	$('#email').textbox({
-		onChange: function(value){
-    		emailValidate(value);
-    	}
+		onChange: function(value) {
+			emailValidate(value);
+		}
 	});
-	
+
 	// Phone 중복 확인 
 	$('#phone').textbox({
-		onChange: function(value){
-    		phoneValidate(value);
-    	}
+		onChange: function(value) {
+			phoneValidate(value);
+		}
 	});
-	
-	
+
+
 	// Tibero DB 커넥션 테스트
-	$('#dbTest').click(function(){
+	$('#dbTest').click(function() {
 		var result = dbConnectionTest();
-		if(result) {
+		if (result) {
 			alert('DB 커넥션 성공');
 		} else {
 			alert('DB 커넥션 실패');
 		}
 	});
-	
+
 	$('#modifyUserForm').submit(function() {
 		var pwCheck = $('#pwCheck').val();
 		var email = $('#email').textbox('textbox').val();
 		var phone = $('#phone').textbox('textbox').val();
 		var dbId = $('#dbId').textbox('textbox').val();
-        var dbPw = $('#dbPw').textbox('textbox').val();
-		
-		if(pwValidate() == 1) {
+		var dbPw = $('#dbPw').textbox('textbox').val();
+
+		if (pwValidate() == 1) {
 			alert('비밀번호를 다시 확인해주세요.');
 			return false;
 		} else if (pwCheckValidate(pwCheck) == 1) {
 			alert('비밀번호를 다시 확인해주세요.');
 			return false;
-		} else if(emailValidate(email) == 1) {
+		} else if (emailValidate(email) == 1) {
 			alert('이메일을 다시 확인해주세요.');
 			return false;
-		} else if(phoneValidate(phone) == 1) {
+		} else if (phoneValidate(phone) == 1) {
 			alert('핸드폰번호를 다시 확인해주세요.');
 			return false;
-		} else if(!((dbId == ' - ') && (dbPw == ' - '))) {
-			if(!dbConnectionTest()) {
+		} else if (!((dbId == ' - ') && (dbPw == ' - '))) {
+			if (!dbConnectionTest()) {
 				alert('DB 정보를 다시 확인해주세요.');
 				return false;
 			}
 		}
 		return true;
 	});
-	
+
 });
 
 // Pw 유효성 검사
@@ -82,7 +82,7 @@ function pwValidate() {
 	} else if (pw.length > 20) {
 		$('#pwMsg').text('20글자 이하로 입력해주세요.');
 		return 1;
-	} else if (!pwRegExp.test(pw)){
+	} else if (!pwRegExp.test(pw)) {
 		$('#pwMsg').text('영문, 숫자, 특수문자가 필수입니다.');
 		return 1;
 	} else if (pw == '') {
@@ -96,7 +96,7 @@ function pwValidate() {
 
 // pwCheck 유효성 검사
 function pwCheckValidate(value) {
-	if(pwValidate() == 1) {
+	if (pwValidate() == 1) {
 		return 1;
 	}
 	var pw = $('#pw').val();
@@ -113,22 +113,22 @@ function pwCheckValidate(value) {
 // Email 유효성 검사
 function emailValidate(value) {
 	var emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-	
-	if(value == '' || value == 'example@example.com') {
+
+	if (value == '' || value == 'example@example.com') {
 		$('#emailMsg').text('');
 		return 1;
-	} else if(!emailRegExp.test(value)) {
+	} else if (!emailRegExp.test(value)) {
 		$('#emailMsg').text('이메일 형식으로 입력해주세요.');
 		return 1;
 	} else {
 		$.ajax({
-			url : '/users/signUpCheck',
-			data : {
-				email : value
+			url: '/users/signUpCheck',
+			data: {
+				email: value
 			},
 			dataType: 'text',
 			success: function(data) {
-				if(data == 1) {
+				if (data == 1) {
 					$('#emailMsg').text('사용중인 이메일입니다.');
 					return 1;
 				} else {
@@ -143,22 +143,22 @@ function emailValidate(value) {
 // Phone 유효성 검사
 function phoneValidate(value) {
 	var phoneRegExp = /^[0-9]/;
-	
-	if(value == "" || value == "'-' 제외 후 입력"){
+
+	if (value == "" || value == "'-' 제외 후 입력") {
 		$('#phoneMsg').text('');
 		return 1;
-	} else if(!phoneRegExp.test(value)) {
+	} else if (!phoneRegExp.test(value)) {
 		$('#phoneMsg').text('번호에는 숫자만 입력해주세요.');
 		return 1;
 	} else {
 		$.ajax({
-			url : '/users/signUpCheck',
-			data : {
-				phone : value
+			url: '/users/signUpCheck',
+			data: {
+				phone: value
 			},
 			dataType: 'text',
 			success: function(data) {
-				if(data == 1) {
+				if (data == 1) {
 					$('#phoneMsg').text('사용중인 번호입니다.');
 					return 1;
 				} else {
@@ -174,18 +174,18 @@ function phoneValidate(value) {
 function dbConnectionTest() {
 	var result = false;
 	$.ajax({
-		url : 'http://10.47.39.102:8080/dbmsTool/connectionTest',
-		method : 'GET',
-		dataType : 'json',
-		data : {
-			dbId : $('#dbId').textbox('textbox').val(),
-			dbPw : $('#dbPw').textbox('textbox').val()
+		url: 'http://10.47.39.102:8080/dbmsTool/connectionTest',
+		method: 'GET',
+		dataType: 'json',
+		data: {
+			dbId: $('#dbId').textbox('textbox').val(),
+			dbPw: $('#dbPw').textbox('textbox').val()
 		},
 		async: false,
-		success : function(data) {
+		success: function(data) {
 			result = data;
 		}
 	});
-	
+
 	return result;
 }

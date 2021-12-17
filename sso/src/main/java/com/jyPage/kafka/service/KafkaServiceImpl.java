@@ -23,7 +23,7 @@ public class KafkaServiceImpl implements KafkaService {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONObject json = new JSONObject(data.getString("data").toString());
 		Users user = new Users();
-		
+
 		user.setId(json.getString("id"));
 		user.setPw(json.getString("pw"));
 		user.setEmail(json.getString("email"));

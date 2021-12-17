@@ -3,96 +3,95 @@ body {
 }
 
 .container {
-	width:400px;
-	height:auto;
-	margin:auto;
+	width: 400px;
+	height: auto;
+	margin: auto;
 	margin-top: 100px;
-	background-color:#fff;
-    border-radius:10px;
-    padding-bottom: 20px;
+	background-color: #fff;
+	border-radius: 10px;
+	padding-bottom: 20px;
 }
 
 .header {
-	margin:auto;
-	height:60px;
+	margin: auto;
+	height: 60px;
 	/* text-align:center; */
 	display: flex;
-	font-size:30px;
+	font-size: 30px;
 	font-weight: 600;
 	color: #fff;
-	background-color:#709078;
-	border-radius:10px 10px 0 0;
+	background-color: #709078;
+	border-radius: 10px 10px 0 0;
 	justify-content: center;
 	align-items: center;
 }
 
 .border {
-	width:350px;
-	height:auto;
-	margin:auto;
-	margin-top:20px;
-	border-radius:10px;
-	padding:20px 20px 10px;
+	width: 350px;
+	height: auto;
+	margin: auto;
+	margin-top: 20px;
+	border-radius: 10px;
+	padding: 20px 20px 10px;
 }
 
 .border input {
-	width:310px;
+	width: 310px;
 }
 
 .border label {
-	font-size:16px;
+	font-size: 16px;
 }
 
 .item {
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
 
-.item .essential{
-	color:red;
+.item .essential {
+	color: red;
 }
 
 .item .row {
-    justify-content: space-between;
+	justify-content: space-between;
 }
 
 .row .msg {
-	color:red;
-	text-align:right;
-	font-size:8px;
-    align-self: flex-end;
+	color: red;
+	text-align: right;
+	font-size: 8px;
+	align-self: flex-end;
 }
 
-.row2{
-	width:100%;
+.row2 {
+	width: 100%;
 	display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+	justify-content: space-between;
+	align-items: baseline;
 }
 
 .row2 a {
-	font-size:12px;
-	text-decoration:none;
-	color:#0969da;
+	font-size: 12px;
+	text-decoration: none;
+	color: #0969da;
 }
 
-
 .signUp-btns {
-	width:350px;
-	margin:auto;
-	margin-top:20px;
-	margin-bottom:10px;
+	width: 350px;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .signUp-btns input {
-	width:150px;
-	height:30px;
+	width: 150px;
+	height: 30px;
 }
 
 #dbTest {
-	width:auto;
+	width: auto;
 	border: none;
-	background-color:#fff;
-	color:#0969da;
-	font-size:12px;
+	background-color: #fff;
+	color: #0969da;
+	font-size: 12px;
 	cursor: pointer;
 }
