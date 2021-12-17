@@ -1,6 +1,7 @@
 package com.jyPage.network;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class NetworkServiceImpl implements NetworkService {
 	@Override
 	public boolean networkCheck(String agentNetwork) {
 		boolean result = false;
-		if (ssoPropertiesNetwork.equals(agentNetwork)) {
+		if (Objects.equals(ssoPropertiesNetwork,agentNetwork)) {
 			result = true;
 		}
 
@@ -80,9 +81,9 @@ public class NetworkServiceImpl implements NetworkService {
 		json.put("update", update);
 		json.put("delete", delete);
 
-		if (data.get("type").equals("DB")) {
+		if (Objects.equals(data.get("type"),"DB")) {
 			ssoSQL.actionSchedulerSave(json.toString());
-		} else if (data.get("type").equals("KAFKA")) {
+		} else if (Objects.equals(data.get("type"),"KAFKA")) {
 			JSONObject kafkaData = new JSONObject();
 			kafkaData.put("id", actionAgentId + "-02");
 			kafkaData.put("data", json.toString());

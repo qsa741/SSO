@@ -1,5 +1,7 @@
 package com.jyPage.kafka;
 
+import java.util.Objects;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +32,7 @@ public class KafkaConsumer {
 		JSONObject json = new JSONObject(data);
 
 		String id = (String) json.get("id");
-		if (id.equals(saveAgentId + "-02")) {
+		if (Objects.equals(id, saveAgentId + "-02")) {
 			kafkaService.saveUser(json);
 		}
 	}
@@ -41,7 +43,7 @@ public class KafkaConsumer {
 		JSONObject json = new JSONObject(data);
 
 		String id = json.getString("id");
-		if (id.equals(actionAgentId)) {
+		if (Objects.equals(id,actionAgentId)) {
 			networkService.settingUserAction(json);
 		}
 	}

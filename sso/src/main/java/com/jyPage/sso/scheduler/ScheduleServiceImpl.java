@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -49,7 +50,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 			user.setPhone(json.getString("phone"));
 			user.setDbId(json.getString("dbId"));
 			user.setDbPw(json.getString("dbPw"));
-			if (json.getString("signUpDate").equals("null")) {
+			
+			if (Objects.equals(json.getString("signUpDate"),"null")) {
 				time = fmt.format(new Date());
 				user.setSignUpDate(fmt.parse(time));
 			} else {

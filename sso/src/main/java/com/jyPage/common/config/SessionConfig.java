@@ -1,6 +1,7 @@
 package com.jyPage.common.config;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.annotation.WebListener;
@@ -19,7 +20,7 @@ public class SessionConfig implements HttpSessionListener {
 		for (String key : sessions.keySet()) {
 			HttpSession session = sessions.get(key);
 			if (session != null && session.getAttribute(type) != null
-					&& session.getAttribute(type).toString().equals(compareId)) {
+					&& Objects.equals(session.getAttribute(type).toString(), compareId)) {
 				result = key.toString();
 			}
 		}

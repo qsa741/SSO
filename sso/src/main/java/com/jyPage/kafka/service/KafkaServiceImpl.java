@@ -2,6 +2,7 @@ package com.jyPage.kafka.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class KafkaServiceImpl implements KafkaService {
 		user.setDbId(json.getString("dbId"));
 		user.setDbPw(json.getString("dbPw"));
 
-		if (json.getString("signUpDate").equals("null")) {
+		if (Objects.equals(json.getString("signUpDate"),"null")) {
 			String time = fmt.format(new Date());
 			user.setSignUpDate(fmt.parse(time));
 		} else {

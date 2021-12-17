@@ -2,6 +2,7 @@ package com.jyPage.sso.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -89,6 +90,7 @@ public class SsoServiceImpl implements SsoService {
 		}
 		user.setState("Y");
 		user.setPw(aes.encrypt(user.getPw()));
+		
 		if (user.getDbPw() != null) {
 			user.setDbPw(aes.encrypt(user.getDbPw()));
 		}
@@ -106,7 +108,7 @@ public class SsoServiceImpl implements SsoService {
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie c : cookies) {
-					if (c.getName().equals("auto")) {
+					if (Objects.equals(c.getName(),"auto")) {
 						SessionConfig.getSessionIdCheck(sessionID, c.getValue());
 						Users newUser = userRepository.findById(c.getValue()).get();
 						setSession(c.getValue(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
@@ -141,7 +143,7 @@ public class SsoServiceImpl implements SsoService {
 				AES256 aes = new AES256();
 				String pw = aes.decrypt(newUser.getPw());
 
-				if (pw.equals(user.getPw())) {
+				if (Objects.equals(pw, user.getPw())) {
 					SessionConfig.getSessionIdCheck(sessionID, user.getId());
 					setSession(user.getId(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 
@@ -195,7 +197,7 @@ public class SsoServiceImpl implements SsoService {
 
 		if (cookies != null) {
 			for (Cookie c : cookies) {
-				if (c.getName().equals("auto")) {
+				if (Objects.equals(c.getName(),"auto")) {
 					c.setMaxAge(0);
 					response.addCookie(c);
 				}
