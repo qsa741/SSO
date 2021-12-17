@@ -55,7 +55,7 @@
 				</c:if>
 			</div>
 		</div>
-		<div class="easyui-layout" style="width: 100%; height: 100%;">
+		<div id="layout" class="easyui-layout">
 			<div class="side easyui-layout" data-options="region:'west',title:'Schema',split:true">
 				<div class="top" data-options="region:'center',split:true">
 					<ul id="dbmsTree" class="easyui-tree">
@@ -84,7 +84,7 @@
 					</div>
 					<div class="bottom" data-options="region:'south',split:true">
 						<div id="console">
-							<div id="consoleTabs" class="easyui-tabs" style="width: 100%;">
+							<div id="consoleTabs" class="easyui-tabs">
 								<div class="tab" title="DBMS_OUTPUT" style="display: none;">
 									<table id="dbmsOutput" class="easyui-datagrid"
 										singleSelect="true">
@@ -121,7 +121,7 @@
 					</div>
 					<div class="bottom" data-options="region:'south',split:true">
 						<div id="console">
-							<div id="consoleTabs" class="easyui-tabs" style="width: 100%;">
+							<div id="consoleTabs" class="easyui-tabs">
 								<div class="tab" title="DBMS_OUTPUT" style="display: none;">
 									<table id="dbmsOutput" class="easyui-datagrid"
 										singleSelect="true">
