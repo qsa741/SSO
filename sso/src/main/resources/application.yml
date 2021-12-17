@@ -23,16 +23,13 @@ spring:
 #    url: jdbc:oracle:thin:@localhost:1521:orcldb
 #    username: sso
 #    password: 1111
-#server:
-#  tomcat:
-#    additional-tld-skip-patterns: "oraclepki.jar"
 dbms:
   url: http://10.47.39.102:8080
 
 save:
   agent:
     id: JY-SAVE
-    network: IN
+    network: OUT
 
 action:
   agent:
@@ -43,4 +40,4 @@ sso:
     session-id: JYSESSION
     session-db-id: JYDBID
     session-db-pw: JYDBPW
-    network: OUT
+    network: IN
