@@ -351,8 +351,9 @@ function runAllSQL() {
 // 중앙 div 탭 추가하기
 function addTab(data) {
 	// 탭이 존재하면 선택하기
-	if ($('#centerTabs').tabs('exists', data.key)) {
-		$('#centerTabs').tabs('select', data.key);
+	if ($('#centerTabs').tabs('exists', data.title)) {
+		$('#centerTabs').tabs('close', data.title);
+		addTab(data);
 	} else {
 		var content = '<div id="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
 		$('#centerTabs').tabs('add', {
