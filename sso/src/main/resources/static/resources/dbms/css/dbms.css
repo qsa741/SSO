@@ -7,24 +7,23 @@
 				#userLabel
 				#userBtn
 			#userMenu
-		#layout
-			.side
-				.top
-					#dbmsTree
-				.bottom
-					#include
-			.content
-				.top
-					#centerTabs
+		.side
+			.top
+				#dbmsTree
+			.bottom
+				#include
+		.content
+			.top
+				#centerTabs
+					.tab
+						#scriptToolbar
+						#scriptBody
+							#script
+			.bottom
+				#console
+					#consoleTabs
 						.tab
-							#scriptToolbar
-							#scriptBody
-								#script
-				.bottom
-					#console
-						#consoleTabs
-							.tab
-								#dbmsOutput	
+							#dbmsOutput	
 		#drawer
 			#chartBtn
 			#chartMenu
@@ -110,12 +109,6 @@ EasyUI
 }
 #userMenu .menu-line {
 	border: none;
-}
-
-
-#layout {
-	width: 100%;
-	height: 100%;
 }
 
 .side {
