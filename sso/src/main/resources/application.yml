@@ -41,3 +41,7 @@ sso:
     session-db-id: JYDBID
     session-db-pw: JYDBPW
     network: IN
+  
+schedule:
+  userScheduler: '0/10 * * * * *'
+  deleteUserScheduler: '0 0 0 * * *'

@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	private UsersRepository userRepository;
 
 	// 10초 간격으로 유저 가입/수정 메서드 실행
-	@Scheduled(cron = "0/10 * * * * *")
+	@Scheduled(cron = "${schedule.userScheduler}")
 	@Override
 	public void userScheduler() throws Exception {
 		List<Map<String, Object>> list = scheduleSQL.userScheduler();
@@ -67,7 +67,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	// 하루 간격으로 탈퇴한지 24개월 지난 계정 삭제
-	@Scheduled(cron = "0 0 0 * * *")
+	@Scheduled(cron = "${schedule.deleteUserScheduler}")
 	@Override
 	public void deleteUserScheduler() throws Exception {
 		scheduleSQL.deleteUserScheduler();
