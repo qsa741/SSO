@@ -2,6 +2,7 @@ package com.jyPage.sso.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jyPage.sso.entity.Users;
 
@@ -17,7 +18,7 @@ public interface SsoService {
 	public void sendMail(Users user) throws Exception;
 
 	// User 저장
-	public void saveUser(Users user) throws Exception;
+	public void saveUser(HttpSession session, Users user) throws Exception;
 
 	// Sign In
 	public int signIn(Users user, String auto, HttpServletResponse response) throws Exception;

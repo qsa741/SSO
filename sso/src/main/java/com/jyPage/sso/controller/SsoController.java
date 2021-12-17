@@ -2,6 +2,7 @@ package com.jyPage.sso.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,8 +63,8 @@ public class SsoController {
 
 	// 회원가입 or 회원정보 수정 성공시 데이터 저장
 	@RequestMapping("/saveUser")
-	public String test(Users user) throws Exception {
-		ssoService.saveUser(user);
+	public String saveUser(HttpSession session, Users user) throws Exception {
+		ssoService.saveUser(session, user);
 
 		return "redirect:/users/signIn";
 	}

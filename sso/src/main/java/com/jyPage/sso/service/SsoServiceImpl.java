@@ -76,7 +76,7 @@ public class SsoServiceImpl implements SsoService {
 	// 입력받은 데이터로 Users에 저장
 	// Pw 암호화
 	@Override
-	public void saveUser(Users user) throws Exception {
+	public void saveUser(HttpSession session, Users user) throws Exception {
 		AES256 aes = new AES256();
 		String action = "C";
 		if (user.getId() == null) {
@@ -85,6 +85,7 @@ public class SsoServiceImpl implements SsoService {
 			user.setId(id);
 			user.setSignUpDate(newUser.getSignUpDate());
 			action = "U";
+			setSession(user.getId(), user.getDbId(), user.getDbPw());
 		}
 		user.setState("Y");
 		user.setPw(aes.encrypt(user.getPw()));
