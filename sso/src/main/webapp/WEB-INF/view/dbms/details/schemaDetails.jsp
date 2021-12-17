@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$('#schemaDetails').tabs({
 	    border:false
@@ -60,8 +59,7 @@
 </script>
 <div id="schemaDetails" class="easyui-tabs">
 	<div class="tab" title="Info" style="display: none;">
-		<table id="schemaDetailsInfo" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="schemaDetailsInfo" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'PARAMETER'">Parameter</th>
@@ -71,8 +69,7 @@
 		</table>
 	</div>
 	<div class="tab" title="Role Grants" style="display: none;">
-		<table id="schemaDetailsRoleGrants" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="schemaDetailsRoleGrants" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'GRANTED_ROLE'">Role</th>
@@ -84,8 +81,7 @@
 		</table>
 	</div>
 	<div class="tab" title="System Privileges" style="display: none;">
-		<table id="schemaDetailsSystemPrivileges" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="schemaDetailsSystemPrivileges" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'PRIVILEGE'">Privileage</th>
@@ -97,8 +93,7 @@
 		</table>
 	</div>
 	<div class="tab" title="Extents" style="display: none;">
-		<table id="schemaDetailsExtents" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="schemaDetailsExtents" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'TABLESPACE'">Tablespace</th>

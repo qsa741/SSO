@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$('#viewDetails').tabs({
 	    border:false
@@ -47,8 +46,7 @@
 </script>
 <div id="viewDetails" class="easyui-tabs">
 	<div class="tab" title="Columns" style="display: none;">
-		<table id="viewDetailsColumns" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="viewDetailsColumns" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'COLUMN_NAME'">Column Name</th>

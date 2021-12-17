@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$('#sequenceDetails').tabs({
 	    border:false
@@ -28,8 +27,7 @@
 </script>
 <div id="sequenceDetails" class="easyui-tabs">
 	<div class="tab" title="Index" style="display: none;">
-		<table id="sequenceDetailsInfo" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="sequenceDetailsInfo" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'PARAMETER'">Parameter</th>

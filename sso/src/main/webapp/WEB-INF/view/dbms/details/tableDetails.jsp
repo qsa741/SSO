@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$('#tableDetails').tabs({
 	    border:false
@@ -99,8 +98,7 @@
 </script>
 <div id="tableDetails" class="easyui-tabs">
 	<div class="tab" title="Table" style="display: none;">
-		<table id="tableDetailsTable" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="tableDetailsTable" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'PARAMETER'">Parameter</th>
@@ -110,8 +108,7 @@
 		</table>
 	</div>
 	<div class="tab" title="Columns" style="display: none;">
-		<table id="tableDetailsColumns" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="tableDetailsColumns" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'COLUMN_NAME'">Column Name</th>
@@ -128,8 +125,7 @@
 	<div class="tab" title="Indexes" style="display: none;">
 		<div class="easyui-layout" style="width: 100%; height: 100%;">
 			<div data-options="region:'center',split:ture" style="height: 50%;">
-				<table id="tableDetailsIndexesTop" class="easyui-datagrid"
-					data-options="singleSelect:'true'">
+				<table id="tableDetailsIndexesTop" class="easyui-datagrid" data-options="singleSelect:'true'">
 					<thead>
 						<tr>
 							<th data-options="field:'CONSTRAINT_NAME'">Index Name</th>
@@ -142,8 +138,7 @@
 				</table>
 			</div>
 			<div data-options="region:'south',split:true" style="height: 50%;">
-				<table id="tableDetailsIndexesBottom" class="easyui-datagrid"
-					data-options="singleSelect:'true'">
+				<table id="tableDetailsIndexesBottom" class="easyui-datagrid" data-options="singleSelect:'true'">
 					<thead>
 						<tr>
 							<th data-options="field:'PARAMETER'">Parameter</th>
@@ -155,8 +150,7 @@
 		</div>
 	</div>
 	<div class="tab" title="Constraints" style="display: none;">
-		<table id="tableDetailsConstraints" class="easyui-datagrid"
-			data-options="singleSelect:'true'">
+		<table id="tableDetailsConstraints" class="easyui-datagrid" data-options="singleSelect:'true'">
 			<thead>
 				<tr>
 					<th data-options="field:'CONSTRAINT_NAME'">Constraint Name</th>
