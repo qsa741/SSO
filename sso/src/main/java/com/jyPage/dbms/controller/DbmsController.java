@@ -2,10 +2,8 @@ package com.jyPage.dbms.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jyPage.dbms.dto.DbObjectDTO;
 
 @RequestMapping("/dbms")
 @Controller
@@ -78,16 +76,6 @@ public class DbmsController {
 	@RequestMapping("/triggerDetails")
 	public String triggerDetails() {
 		return "/dbms/details/triggerDetails";
-	}
-
-	// 추가 table tab 페이지
-	@RequestMapping("/loadTable")
-	public String loadTable(DbObjectDTO dto, String userId, Model model) {
-		model.addAttribute("dto", dto);
-		model.addAttribute("userId", userId);
-		model.addAttribute("url", url);
-		
-		return "/dbms/table";
 	}
 
 }

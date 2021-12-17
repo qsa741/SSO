@@ -59,21 +59,21 @@ $(document).ready(function() {
 		// 더블클릭시 ID에 맞는 하위 목록 불러오기
 		onDblClick: function(node) {
 			if (node.id == 'SCHEMA') {
-				getSchemaInfo(node,'db');
+				getSchemaInfo(node,'dblClick');
 			} else if (node.id == 'TABLE') {
-				loadObjectTable(node, 'db');
+				loadObjectTable(node, 'dblClick');
 			} else {
-				getObjectInfo(node, 'db');
+				getObjectInfo(node, 'dblClick');
 			}
 		},
 		// 화살표 클릭시 ID에 맞는 하위 목록 불러오기
 		onBeforeExpand: function(node) {
 			if (node.id == 'SCHEMA') {
-				getSchemaInfo(node, 'ex');
+				getSchemaInfo(node, 'expand');
 			} else if (node.id == 'TABLE') {
-				loadObjectTable(node, 'ex');
+				loadObjectTable(node, 'expand');
 			} else {
-				getObjectInfo(node, 'ex');
+				getObjectInfo(node, 'expand');
 			}
 		}
 		
@@ -178,25 +178,25 @@ function getSchemaInfo(node, type) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'ex'){
+					if(type == 'expand'){
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data,
 					});
-					if(type == 'ex') {
+					if(type == 'expand') {
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'db') {
+			if(type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'db') {
+		if(type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -218,25 +218,25 @@ function getObjectInfo(node, type) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'ex'){
+					if(type == 'expand'){
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data
 					});
-					if(type == 'ex'){
+					if(type == 'expand'){
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'db') {
+			if(type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'db') {
+		if(type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -244,9 +244,21 @@ function getObjectInfo(node, type) {
 
 // 테이블 정보 불러오기
 function loadObjectTable(node, type) {
-	if(type == 'db') {
+	if(type == 'dblClick') {
 		var root = $('#dbmsTree').tree('getRoot', node.target);
-		addTab(node.text, '/dbms/loadTable?schemaName=' + root.text + '&objectType=' + node.id + '&tableName=' + node.text + '&userId=' + userId);
+		$.ajax({
+			url: url + '/dbmsTool/loadObject',
+			data : {
+				schemaName : root.text,
+				objectType : node.id,
+				tableName : node.text,
+				userId : userId
+			},
+			dataType: 'json',
+			success : function(data) {
+				addTab(data);
+			}
+		});
 	}
 	getTableChildren(node, type);
 }
@@ -269,25 +281,25 @@ function getTableChildren(node, type) {
 				if (data == null) {
 					sessionOut();
 				} else {
-					if(type == 'ex'){
+					if(type == 'expand'){
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 					$('#dbmsTree').tree('append', {
 						parent: node.target,
 						data: data.children
 					});
-					if(type == 'ex'){
+					if(type == 'expand'){
 						$('#dbmsTree').tree('toggle', node.target);
 					}
 				}
 			}
 		}).done(function() {
-			if(type == 'db') {
+			if(type == 'dblClick') {
 				folderToggle(node);
 			}
 		});
 	} else {
-		if(type == 'db') {
+		if(type == 'dblClick') {
 			folderToggle(node);
 		}
 	}
@@ -337,19 +349,33 @@ function runAllSQL() {
 }
 
 // 중앙 div 탭 추가하기
-function addTab(title, url) {
+function addTab(data) {
 	// 탭이 존재하면 선택하기
-	if ($('#centerTabs').tabs('exists', title)) {
-		$('#centerTabs').tabs('select', title);
+	if ($('#centerTabs').tabs('exists', data.key)) {
+		$('#centerTabs').tabs('select', data.key);
 	} else {
-		// html include 방식으로 구현
-		var content = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
+		var content = '<div id="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
 		$('#centerTabs').tabs('add', {
-			title: title,
+			title: data.title,
 			content: content,
 			closable: true,
 		});
-	}
+		var cols = []
+		var obj = data.columns;
+		for (var value in obj) {
+			var menuItem = {
+				field: obj[value],
+				title: obj[value],
+				width: 100,
+				align: 'center'
+			};
+			cols.push(menuItem);
+		} 
+		$('#' + data.key).datagrid({
+			columns : [cols],
+			data : data.data
+		});
+	}	
 }
 
 
@@ -376,9 +402,10 @@ function consoleAddTab(data) {
 		$('#consoleTabs').tabs('close', data.sql);
 		consoleAddTab(data);
 	} else {
+		var content = '<div id="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
 		$('#consoleTabs').tabs('add', {
 			title: data.sql,
-			content: '<div id="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>',
+			content: content,
 			closable: true
 		});
 		var columns = []
