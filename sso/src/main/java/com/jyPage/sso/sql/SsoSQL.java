@@ -30,7 +30,7 @@ public class SsoSQL {
 
 	// 유저활동 저장
 	public void saveUserAction(String action, String id) throws JYException {
-		String insert = "insert into userAction values(?,?,sysdate)";
+		String insertSQL = "insert into userAction values(?,?,sysdate)";
 
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -38,7 +38,7 @@ public class SsoSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-			pre = conn.prepareStatement(insert);
+			pre = conn.prepareStatement(insertSQL);
 			pre.setString(1, action);
 			pre.setString(2, id);
 			pre.executeUpdate();
@@ -57,7 +57,7 @@ public class SsoSQL {
 		JSONObject json = new JSONObject();
 
 		// 전날 action 총 카운트 구하기
-		String actionCount = "select to_char(reg, 'YYYY-MM-DD') as reg, count(*) as count "
+		String actionCounting = "select to_char(reg, 'YYYY-MM-DD') as reg, count(*) as count "
 				+ "from (select * from userAction where action = ? and to_char(reg, 'YYYY-MM-DD') = to_char(sysdate - 1, 'YYYY-MM-DD')) "
 				+ "group by to_char(reg, 'YYYY-MM-DD')";
 
@@ -71,7 +71,7 @@ public class SsoSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-			pre = conn.prepareStatement(actionCount);
+			pre = conn.prepareStatement(actionCounting);
 			pre.setString(1, action);
 			rs = pre.executeQuery();
 
@@ -103,7 +103,7 @@ public class SsoSQL {
 
 	// actionScheduler 테이블에 명령어 등록
 	public void actionSchedulerSave(String data) throws JYException {
-		String insert = "insert into ACTIONSCHEDULER values(GRAPH_SEQ.NEXTVAL, ?, sysdate, 'N')";
+		String insertSQL = "insert into ACTIONSCHEDULER values(GRAPH_SEQ.NEXTVAL, ?, sysdate, 'N')";
 
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -111,7 +111,7 @@ public class SsoSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-			pre = conn.prepareStatement(insert);
+			pre = conn.prepareStatement(insertSQL);
 			pre.setString(1, data);
 			pre.executeUpdate();
 

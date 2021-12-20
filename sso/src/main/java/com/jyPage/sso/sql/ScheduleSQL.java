@@ -35,9 +35,9 @@ public class ScheduleSQL {
 	// 가입/수정이 요청된 레코드 저장
 	public List<Map<String, Object>> userScheduler() throws JYException {
 		// 스케줄러가 읽지 않은 데이터 찾기
-		String sql = "select * from userScheduler where readCheck = 'N'";
+		String selectSQL = "select * from userScheduler where readCheck = 'N'";
 		// 스케줄러가 읽은 데이터 readCheck = 'Y'로 업데이트
-		String sql2 = "update userScheduler set executeTime = sysdate, readCheck = 'Y' where scheduleNum = ?";
+		String updateSQL = "update userScheduler set executeTime = sysdate, readCheck = 'Y' where scheduleNum = ?";
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		Connection conn = null;
@@ -47,7 +47,7 @@ public class ScheduleSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-			pre = conn.prepareStatement(sql);
+			pre = conn.prepareStatement(selectSQL);
 			result = pre.executeQuery();
 
 			ResultSetMetaData metaData = result.getMetaData();
@@ -64,7 +64,7 @@ public class ScheduleSQL {
 				}
 
 				list.add(map);
-				pre = conn.prepareStatement(sql2);
+				pre = conn.prepareStatement(updateSQL);
 				pre.setString(1, (String) map.get("SCHEDULENUM"));
 				pre.executeUpdate();
 			}
@@ -84,7 +84,7 @@ public class ScheduleSQL {
 
 	// 탈퇴 후 2년이 지난 레코드 삭제
 	public void deleteUserScheduler() throws JYException {
-		String sql = "delete from users where MONTHS_BETWEEN(sysdate, reg) >= 24 and state = 'N'";
+		String deleteSQL = "delete from users where MONTHS_BETWEEN(sysdate, reg) >= 24 and state = 'N'";
 
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -93,7 +93,7 @@ public class ScheduleSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-			pre = conn.prepareStatement(sql);
+			pre = conn.prepareStatement(deleteSQL);
 			result = pre.executeQuery();
 
 			result.close();
