@@ -403,7 +403,7 @@ function consoleAddTab(data) {
 		$('#consoleTabs').tabs('close', data.sql);
 		consoleAddTab(data);
 	} else {
-		var content = '<div id="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
+		var content = '<div class="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
 		$('#consoleTabs').tabs('add', {
 			title: data.sql,
 			content: content,
@@ -419,7 +419,7 @@ function consoleAddTab(data) {
 			};
 			columns.push(menuItem);
 		}
-		$('#' + data.key).datagrid({
+		$('.' + data.key).datagrid({
 			columns: [columns],
 			data: data.data
 		});
