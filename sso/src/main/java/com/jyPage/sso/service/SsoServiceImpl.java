@@ -20,6 +20,7 @@ import com.jyPage.common.config.SessionConfig;
 import com.jyPage.common.util.AES256;
 import com.jyPage.common.util.SendMail;
 import com.jyPage.network.NetworkServiceImpl;
+import com.jyPage.sso.config.Action;
 import com.jyPage.sso.entity.Users;
 import com.jyPage.sso.repository.UsersRepository;
 import com.jyPage.sso.sql.SsoSQL;
@@ -79,13 +80,16 @@ public class SsoServiceImpl implements SsoService {
 	@Override
 	public void saveUser(HttpSession session, Users user) throws Exception {
 		AES256 aes = new AES256();
-		String action = "C";
+		String action = Action.CREATE.name();
 		if (user.getId() == null) {
 			String id = sessionID();
+			
 			Users newUser = userRepository.findById(id).get();
 			user.setId(id);
 			user.setSignUpDate(newUser.getSignUpDate());
-			action = "U";
+			
+			action = Action.UPDATE.name();
+			
 			setSession(user.getId(), user.getDbId(), user.getDbPw());
 		}
 		user.setState("Y");
@@ -112,7 +116,7 @@ public class SsoServiceImpl implements SsoService {
 						SessionConfig.getSessionIdCheck(sessionID, c.getValue());
 						Users newUser = userRepository.findById(c.getValue()).get();
 						setSession(c.getValue(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
-						ssoSQL.saveUserAction("R", c.getValue());
+						ssoSQL.saveUserAction(Action.READ.name(), c.getValue());
 
 						return true;
 					}
@@ -121,7 +125,7 @@ public class SsoServiceImpl implements SsoService {
 		} else {
 			Users newUser = userRepository.findById(sid).get();
 			setSession(sid, newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
-			ssoSQL.saveUserAction("R", sid);
+			ssoSQL.saveUserAction(Action.READ.name(), sid);
 
 			return true;
 		}
@@ -147,7 +151,7 @@ public class SsoServiceImpl implements SsoService {
 					SessionConfig.getSessionIdCheck(sessionID, user.getId());
 					setSession(user.getId(), newUser.getDbId(), aes.decrypt(newUser.getDbPw()));
 
-					ssoSQL.saveUserAction("R", user.getId());
+					ssoSQL.saveUserAction(Action.READ.name(), user.getId());
 					if (auto != null) {
 						Cookie cookie = new Cookie("auto", user.getId());
 						cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -169,6 +173,7 @@ public class SsoServiceImpl implements SsoService {
 	public Users getSessionUser() throws Exception {
 		AES256 aes = new AES256();
 		String id = sessionID();
+		
 		Users user = userRepository.findById(id).get();
 		user.setPw(aes.decrypt(user.getPw()));
 		user.setDbPw(aes.decrypt(user.getDbPw()));
@@ -182,11 +187,13 @@ public class SsoServiceImpl implements SsoService {
 		String id = sessionID();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = fmt.format(new Date());
+		
 		Users user = userRepository.findById(id).get();
 		user.setState("N");
 		user.setUnSignDate(fmt.parse(time));
+		
 		userRepository.save(user);
-		ssoSQL.saveUserAction("D", id);
+		ssoSQL.saveUserAction(Action.DELETE.name(), id);
 		signOut(request, response);
 	}
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.jyPage.kafka.KafkaProducer;
+import com.jyPage.sso.config.Action;
+import com.jyPage.sso.config.SAVE;
 import com.jyPage.sso.entity.Users;
 import com.jyPage.sso.sql.SsoSQL;
 
@@ -55,9 +57,9 @@ public class NetworkServiceImpl implements NetworkService {
 		json.put("id", saveAgentId);
 		// 망이 같으면 DB, 다르면 KAFKA로 타입 전송
 		if (networkCheck(saveAgentNetwork)) {
-			json.put("type", "DB");
+			json.put("type", SAVE.DB.name());
 		} else {
-			json.put("type", "KAFKA");
+			json.put("type", SAVE.KAFKA.name());
 		}
 		json.put("time", new Date().toString());
 		json.put("data", user.toString());
@@ -70,20 +72,20 @@ public class NetworkServiceImpl implements NetworkService {
 	// 같은망일때 DB로, 다른망일때 KAFKA로 type 세팅
 	@Override
 	public void settingUserAction(JSONObject data) throws Exception {
-		JSONObject create = ssoSQL.getUserAction("C");
-		JSONObject read = ssoSQL.getUserAction("R");
-		JSONObject update = ssoSQL.getUserAction("U");
-		JSONObject delete = ssoSQL.getUserAction("D");
+		JSONObject create = ssoSQL.getUserAction(Action.CREATE.name());
+		JSONObject read = ssoSQL.getUserAction(Action.READ.name());
+		JSONObject update = ssoSQL.getUserAction(Action.UPDATE.name());
+		JSONObject delete = ssoSQL.getUserAction(Action.DELETE.name());
 
 		JSONObject json = new JSONObject();
-		json.put("create", create);
-		json.put("read", read);
-		json.put("update", update);
-		json.put("delete", delete);
+		json.put(Action.CREATE.name(), create);
+		json.put(Action.READ.name(), read);
+		json.put(Action.UPDATE.name(), update);
+		json.put(Action.DELETE.name(), delete);
 
-		if (Objects.equals(data.get("type"),"DB")) {
+		if (Objects.equals(data.get("type"),SAVE.DB.name())) {
 			ssoSQL.actionSchedulerSave(json.toString());
-		} else if (Objects.equals(data.get("type"),"KAFKA")) {
+		} else if (Objects.equals(data.get("type"),SAVE.KAFKA.name())) {
 			JSONObject kafkaData = new JSONObject();
 			kafkaData.put("id", actionAgentId + "-02");
 			kafkaData.put("data", json.toString());
