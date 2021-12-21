@@ -47,6 +47,7 @@ public class ScheduleSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
+			conn.setAutoCommit(false);
 			pre = conn.prepareStatement(selectSQL);
 			result = pre.executeQuery();
 
@@ -71,10 +72,16 @@ public class ScheduleSQL {
 
 			result.close();
 			pre.close();
+			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
 			throw new JYException("Class Not Found Exception", cnfe);
 		} catch (SQLException se) {
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				throw new JYException("SQL Exception", e);
+			}
 			throw new JYException("SQL Exception", se);
 		}
 
@@ -93,15 +100,23 @@ public class ScheduleSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
+			conn.setAutoCommit(false);
 			pre = conn.prepareStatement(deleteSQL);
 			result = pre.executeQuery();
 
 			result.close();
 			pre.close();
+			
+			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
 			throw new JYException("Class Not Found Exception", cnfe);
 		} catch (SQLException se) {
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				throw new JYException("SQL Exception", e);
+			}
 			throw new JYException("SQL Exception", se);
 		}
 	}

@@ -38,16 +38,24 @@ public class SsoSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
+			conn.setAutoCommit(false);
 			pre = conn.prepareStatement(insertSQL);
 			pre.setString(1, action);
 			pre.setString(2, id);
 			pre.executeUpdate();
 
 			pre.close();
+			
+			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
 			throw new JYException("Class Not Found Exception", cnfe);
 		} catch (SQLException se) {
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				throw new JYException("SQL Exception", e);
+			}
 			throw new JYException("SQL Exception", se);
 		}
 	}
@@ -111,15 +119,23 @@ public class SsoSQL {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
+			conn.setAutoCommit(false);
 			pre = conn.prepareStatement(insertSQL);
 			pre.setString(1, data);
 			pre.executeUpdate();
 
 			pre.close();
+			
+			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
 			throw new JYException("Class Not Found Exception", cnfe);
 		} catch (SQLException se) {
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				throw new JYException("SQL Exception", e);
+			}
 			throw new JYException("SQL Exception", se);
 		}
 	}
