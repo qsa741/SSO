@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.jyPage.kafka.KafkaProducer;
+import com.jyPage.network.config.Network;
 import com.jyPage.sso.config.Action;
-import com.jyPage.sso.config.SAVE;
 import com.jyPage.sso.entity.Users;
 import com.jyPage.sso.sql.SsoSQL;
 
@@ -57,9 +57,9 @@ public class NetworkServiceImpl implements NetworkService {
 		json.put("id", saveAgentId);
 		// 망이 같으면 DB, 다르면 KAFKA로 타입 전송
 		if (networkCheck(saveAgentNetwork)) {
-			json.put("type", SAVE.DB.name());
+			json.put("type", Network.DB.name());
 		} else {
-			json.put("type", SAVE.KAFKA.name());
+			json.put("type", Network.KAFKA.name());
 		}
 		json.put("time", new Date().toString());
 		json.put("data", user.toString());
@@ -83,9 +83,9 @@ public class NetworkServiceImpl implements NetworkService {
 		json.put(Action.UPDATE.name(), update);
 		json.put(Action.DELETE.name(), delete);
 
-		if (Objects.equals(data.get("type"),SAVE.DB.name())) {
+		if (Objects.equals(data.get("type"),Network.DB.name())) {
 			ssoSQL.actionSchedulerSave(json.toString());
-		} else if (Objects.equals(data.get("type"),SAVE.KAFKA.name())) {
+		} else if (Objects.equals(data.get("type"),Network.KAFKA.name())) {
 			JSONObject kafkaData = new JSONObject();
 			kafkaData.put("id", actionAgentId + "-02");
 			kafkaData.put("data", json.toString());
