@@ -11,9 +11,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.jyPage.common.util.ConvertSqlToString;
 import com.jyPage.exception.JYException;
 
 @Service
@@ -32,12 +34,15 @@ public class ScheduleSQL {
 	@Value("${spring.datasource.password}")
 	private String password;
 
+	@Autowired
+	private ConvertSqlToString converter;
+	
 	// 가입/수정이 요청된 레코드 저장
 	public List<Map<String, Object>> userScheduler() throws JYException {
 		// 스케줄러가 읽지 않은 데이터 찾기
-		String selectSQL = "select * from userScheduler where readCheck = 'N'";
+		String selectSQL = converter.Convert("sql/ScheduleSQL/userSchedulerSelect.sql");
 		// 스케줄러가 읽은 데이터 readCheck = 'Y'로 업데이트
-		String updateSQL = "update userScheduler set executeTime = sysdate, readCheck = 'Y' where scheduleNum = ?";
+		String updateSQL = converter.Convert("sql/ScheduleSQL/userSchedulerUpdate.sql");
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		Connection conn = null;
@@ -91,7 +96,7 @@ public class ScheduleSQL {
 
 	// 탈퇴 후 2년이 지난 레코드 삭제
 	public void deleteUserScheduler() throws JYException {
-		String deleteSQL = "delete from users where MONTHS_BETWEEN(sysdate, reg) >= 24 and state = 'N'";
+		String deleteSQL = converter.Convert("sql/ScheduleSQL/deleteUserScheduler.sql");
 
 		Connection conn = null;
 		PreparedStatement pre = null;

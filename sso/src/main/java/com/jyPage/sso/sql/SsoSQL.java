@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.jyPage.common.util.ConvertSqlToString;
 import com.jyPage.exception.JYException;
 
 @Service
@@ -28,10 +30,13 @@ public class SsoSQL {
 	@Value("${spring.datasource.password}")
 	private String password;
 
+	@Autowired
+	private ConvertSqlToString converter;
+	
 	// 유저활동 저장
 	public void saveUserAction(String action, String id) throws JYException {
-		String insertSQL = "insert into userAction values(?,?,sysdate)";
-
+		String insertSQL = converter.Convert("sql/SsoSQL/saveUserAction.sql");
+		
 		Connection conn = null;
 		PreparedStatement pre = null;
 
@@ -45,7 +50,6 @@ public class SsoSQL {
 			pre.executeUpdate();
 
 			pre.close();
-			
 			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
@@ -65,12 +69,10 @@ public class SsoSQL {
 		JSONObject json = new JSONObject();
 
 		// 전날 action 총 카운트 구하기
-		String actionCounting = "select to_char(reg, 'YYYY-MM-DD') as reg, count(*) as count "
-				+ "from (select * from userAction where action = ? and to_char(reg, 'YYYY-MM-DD') = to_char(sysdate - 1, 'YYYY-MM-DD')) "
-				+ "group by to_char(reg, 'YYYY-MM-DD')";
+		String actionCounting = converter.Convert("sql/SsoSQL/getUserActionCount.sql");
 
 		// 전날 action이 없었을 경우 빈칸 채우기 용으로 검색
-		String actionEmpty = "select to_char(sysdate - 1, 'YYYY-MM-DD'), 0 from dual";
+		String actionEmpty = converter.Convert("sql/SsoSQL/getUserActionEmpty.sql");
 
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -111,7 +113,7 @@ public class SsoSQL {
 
 	// actionScheduler 테이블에 명령어 등록
 	public void actionSchedulerSave(String data) throws JYException {
-		String insertSQL = "insert into ACTIONSCHEDULER values(GRAPH_SEQ.NEXTVAL, ?, sysdate, 'N')";
+		String insertSQL = converter.Convert("sql/SsoSQL/actionSchedulerSave.sql");
 
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -125,7 +127,6 @@ public class SsoSQL {
 			pre.executeUpdate();
 
 			pre.close();
-			
 			conn.commit();
 			conn.close();
 		} catch (ClassNotFoundException cnfe) {
