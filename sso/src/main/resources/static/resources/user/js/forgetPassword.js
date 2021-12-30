@@ -67,11 +67,11 @@ function forgetPasswordSubmit() {
 	var email = $('#emailMsg').text();
 
 	if (id == '존재하지않는 아이디입니다.' || !$('#id').textbox('textbox').val()) {
-		alert("아이디를 입력해주세요.");
+		alert("아이디를 다시 입력해주세요.");
 		return false;
 	}
 	if (email == '등록된 이메일이 아닙니다.' || !$('#email').textbox('textbox').val()) {
-		alert("이메일을 입력해주세요.");
+		alert("이메일을 다시 입력해주세요.");
 		return false;
 	}
 
