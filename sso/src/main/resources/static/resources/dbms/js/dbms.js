@@ -403,7 +403,7 @@ function consoleAddTab(data) {
 		$('#consoleTabs').tabs('close', data.sql);
 		consoleAddTab(data);
 	} else {
-		var content = '<div class="' + data.key + '" class="easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
+		var content = '<div class="' + data.key + ' easyui-datagrid" singleSelect="true" style="width:100%;height:100%;"></div>';
 		$('#consoleTabs').tabs('add', {
 			title: data.sql,
 			content: content,
@@ -415,7 +415,7 @@ function consoleAddTab(data) {
 			var menuItem = {
 				field: obj[value],
 				title: obj[value],
-				width: 100,
+				width: 100
 			};
 			columns.push(menuItem);
 		}
