@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbms/loadObject',
+		url: 'http://10.47.39.98:8080/dbms/loadObject',
 		data: {
 			schema: root.text,
 			objectType: node.id,

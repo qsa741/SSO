@@ -75,6 +75,11 @@
 		    <artifactId>json</artifactId>
 		    <version>20160810</version>
 		</dependency>
+		<dependency>
+			<groupId>com.tmax.tibero</groupId>
+			<artifactId>tibero-jdbc</artifactId>
+			<version>6.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

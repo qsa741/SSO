@@ -5,7 +5,7 @@
 	});
 	
 	$(document).ready(function() {
-		var url = 'http://10.47.39.102:8080';
+		var url = 'http://10.47.39.98:8080';
 		if(${sessionScope.JYDBID eq null}) {
 			alert('세션이 만료되었습니다. 로그인이 필요합니다.');
 			window.location='/users/signOut';

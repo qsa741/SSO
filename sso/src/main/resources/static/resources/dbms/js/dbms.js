@@ -2,7 +2,7 @@ var userId;
 var url;
 $(document).ready(function() {
 	userId = $('#userLabel label').text();
-	url = 'http://10.47.39.102:8080';
+	url = 'http://10.47.39.98:8080';
 
 	// dbmsTree 초기 데이터 세팅
 	$.ajax({

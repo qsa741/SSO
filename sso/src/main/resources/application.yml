@@ -13,7 +13,7 @@ spring:
   session:
     timeout: 120
   kafka:#    bootstrap-servers: 3.14.8.219:9092
-    bootstrap-servers: 10.47.39.102:9092
+    bootstrap-servers: 10.47.39.67:9092,10.47.39.124:9092,10.47.39.125:9092
   datasource:
     url: jdbc:tibero:thin:@10.47.39.125:8629:DB_D_GMD
     driver-class-name: com.tmax.tibero.jdbc.TbDriver
@@ -24,7 +24,7 @@ spring:
 #    username: sso
 #    password: 1111
 dbms:
-  url: http://10.47.39.102:8080
+  url: http://10.47.39.98:8080
 
 save:
   agent:

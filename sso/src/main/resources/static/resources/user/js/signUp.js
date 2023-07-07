@@ -222,7 +222,7 @@ function phoneValidate(value) {
 function dbConnectionTest() {
 	var result = false;
 	$.ajax({
-		url: 'http://10.47.39.102:8080/dbmsTool/connectionTest',
+		url: 'http://10.47.39.98:8080/dbmsTool/connectionTest',
 		method: 'GET',
 		dataType: 'json',
 		data: {

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('#sessionCheck').click(function() {
 		$.ajax({
-			url: 'http://10.47.39.102:8080/dbms/sessionCheck',
+			url: 'http://10.47.39.98:8080/dbms/sessionCheck',
 			success: function(data) {
 				console.log(data);
 			}
